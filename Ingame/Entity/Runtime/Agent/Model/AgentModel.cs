@@ -93,6 +93,16 @@ namespace Ingame
 
             onStatChanged.AddListener(OnStatChanged);
             inventory.onChangedEquipment.AddListener(_ => onStatChanged.Invoke());
+            inventory.onChangedQuickSlot.AddListener(OnInventoryChanged);
+            inventory.onChangedBag.AddListener(OnInventoryChanged);
+        }
+
+        private void OnInventoryChanged(InventorySlotModel changedSlot)
+        {
+            if (changedSlot == heldItemSlot)
+            {
+                onHeldItem.Invoke(heldItemSlot);
+            }
         }
 
         protected void Awake()
