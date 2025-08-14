@@ -1,0 +1,22 @@
+{
+  "name": "Game.Outgame.Shop.Editor",
+  "rootNamespace": "",
+  "references": [
+    "GUID:62ef3f16c11faf74eb01c5a0b29db63d",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:83a0c72d292d6d942a7dad87b131ec8d",
+    "GUID:c6d3e980dab91984f8334fe084dcc9d2",
+    "GUID:e742b83414bfe40448671052433e3056"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

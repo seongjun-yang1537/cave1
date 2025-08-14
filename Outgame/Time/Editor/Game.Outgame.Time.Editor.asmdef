@@ -1,0 +1,24 @@
+{
+  "name": "Game.Outgame.Time.Editor",
+  "rootNamespace": "",
+  "references": [
+    "GUID:2e76d83e3d8327e4cb1e4858535d7cce",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:7e2d0f26701ab8248ab477ca1624d63f",
+    "GUID:83eb637d4377d974b94794d5eef8b9ab",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3",
+    "GUID:c6d3e980dab91984f8334fe084dcc9d2",
+    "GUID:f9dc0238f0f7eb146a2cbcd7978c3faf"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

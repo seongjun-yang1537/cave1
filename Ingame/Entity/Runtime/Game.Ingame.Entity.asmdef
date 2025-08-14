@@ -1,0 +1,28 @@
+{
+  "name": "Game.Ingame.Entity",
+  "rootNamespace": "",
+  "references": [
+    "GUID:324caed91501a9c47a04ebfd87b68794",
+    "GUID:49b49c76ee64f6b41bf28ef951cb0e50",
+    "GUID:5eee5f2b2f648d64fb50e0d96272e7ab",
+    "GUID:6055be8ebefd69e48b49212b09b47b2f",
+    "GUID:62ef3f16c11faf74eb01c5a0b29db63d",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:acc057ea9cfa1a44b954736f55f8acb8",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3",
+    "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+    "GUID:ed773f2ed95d8aa4887dd8c3b1d90959",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [
+    "GameCoreXboxOne"
+  ],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

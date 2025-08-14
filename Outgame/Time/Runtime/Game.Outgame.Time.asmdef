@@ -1,0 +1,17 @@
+{
+  "name": "Game.Outgame.Time",
+  "rootNamespace": "",
+  "references": [
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Game.Outgame.Quest.Editor",
+  "rootNamespace": "",
+  "references": [
+    "CoreLib",
+    "Corelib.Editor",
+    "Game.Core",
+    "Game.Core.Editor",
+    "Game.Ingame.Entity",
+    "Game.Ingame.Item",
+    "Game.Outgame.Quest"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

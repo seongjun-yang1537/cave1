@@ -1,0 +1,25 @@
+{
+  "name": "Game.Ingame.Realm.Editor",
+  "rootNamespace": "",
+  "references": [
+    "GUID:5453384ec0769c84b98930d28688d7c6",
+    "GUID:62ef3f16c11faf74eb01c5a0b29db63d",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:7e2d0f26701ab8248ab477ca1624d63f",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3",
+    "GUID:c6d3e980dab91984f8334fe084dcc9d2",
+    "GUID:eca2db821239c2c4c90945d9f652a478",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

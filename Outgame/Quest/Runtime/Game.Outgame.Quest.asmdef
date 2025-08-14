@@ -1,0 +1,20 @@
+{
+  "name": "Game.Outgame.Quest",
+  "rootNamespace": "",
+  "references": [
+    "GUID:2e76d83e3d8327e4cb1e4858535d7cce",
+    "GUID:324caed91501a9c47a04ebfd87b68794",
+    "GUID:62ef3f16c11faf74eb01c5a0b29db63d",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

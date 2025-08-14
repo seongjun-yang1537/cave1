@@ -1,0 +1,27 @@
+{
+  "name": "Game.Ingame.World",
+  "rootNamespace": "",
+  "references": [
+    "GUID:2665a8d13d1b3f18800f46e256720795",
+    "GUID:2e76d83e3d8327e4cb1e4858535d7cce",
+    "GUID:5eee5f2b2f648d64fb50e0d96272e7ab",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:a432eb0a70c5c4a37ab50d59671586f8",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3",
+    "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+    "GUID:b8e24fd1eb19b4226afebb2810e3c19b",
+    "GUID:bf2cb0e018eaecb4eae3db986a1bfd21",
+    "GUID:ca937d03ee5dd4d699091438dc0f3ae6",
+    "GUID:d8b63aba1907145bea998dd612889d6b",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

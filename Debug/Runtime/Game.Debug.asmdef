@@ -1,0 +1,28 @@
+{
+  "name": "Game.Debug",
+  "rootNamespace": "",
+  "references": [
+    "CoreLib",
+    "Game.Core",
+    "Game.Domain",
+    "Game.Ingame.Entity",
+    "Game.Ingame.Item",
+    "Game.Ingame.Realm",
+    "Game.Ingame.World",
+    "Game.Outgame.Quest",
+    "Game.Outgame.Shop",
+    "Game.Outgame.Time",
+    "Game.PathX",
+    "Game.VFX",
+    "VoxelEngine"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,25 @@
+{
+  "name": "VoxelEngine.Editor",
+  "rootNamespace": "",
+  "references": [
+    "GUID:2e76d83e3d8327e4cb1e4858535d7cce",
+    "GUID:5eee5f2b2f648d64fb50e0d96272e7ab",
+    "GUID:6d884aaed73b4fa4691936c4ce6fdd0a",
+    "GUID:b00aa2e0415f3d340b76e9f71d50baa3",
+    "GUID:bf2cb0e018eaecb4eae3db986a1bfd21",
+    "GUID:c6d3e980dab91984f8334fe084dcc9d2",
+    "GUID:d9d767d861ffc2d49a3bec23b0edae29",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
