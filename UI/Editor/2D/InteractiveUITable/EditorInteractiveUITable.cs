@@ -15,8 +15,11 @@ namespace UI
         SearchField searchField;
         string searchText = string.Empty;
 
+        List<Type> tooltipTypes;
+        string[] tooltipNames;
         List<Type> contextTypes;
         string[] contextNames;
+
         int newIndex;
         GameObject newPrefab;
         int tabIndex;
@@ -25,16 +28,17 @@ namespace UI
         {
             script = (InteractiveUITable)target;
             searchField = new SearchField();
-            LoadTypes(typeof(TooltipContext));
+            LoadTypes();
         }
 
-        void LoadTypes(Type baseType)
+        void LoadTypes()
         {
-            contextTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())
-                .Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract)
-                .OrderBy(t => t.Name)
-                .ToList();
+            var allTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes());
+
+            tooltipTypes = allTypes.Where(t => t.IsSubclassOf(typeof(TooltipContext)) && !t.IsAbstract).OrderBy(t => t.Name).ToList();
+            tooltipNames = tooltipTypes.Select(t => t.Name).ToArray();
+
+            contextTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ContextUIContext)) && !t.IsAbstract).OrderBy(t => t.Name).ToList();
             contextNames = contextTypes.Select(t => t.Name).ToArray();
         }
 
@@ -42,7 +46,6 @@ namespace UI
         {
             serializedObject.Update();
             tabIndex = GUILayout.Toolbar(tabIndex, new[] { "TooltipUI", "ContextUI" });
-            LoadTypes(tabIndex == 0 ? typeof(TooltipContext) : typeof(ContextUIContext));
             var table = tabIndex == 0 ? script.tooltipTable : script.contextTable;
             SEditorGUI.ChangeCheck(
                 script,
@@ -70,6 +73,9 @@ namespace UI
 
         SUIElement RenderDictionary(InteractiveUITable.PrefabDictionary table)
         {
+            var types = tabIndex == 0 ? tooltipTypes : contextTypes;
+            var names = tabIndex == 0 ? tooltipNames : contextNames;
+
             var container = SEditorGUILayout.Vertical();
             var elements = new List<SUIElement>();
             elements.Add(
@@ -78,15 +84,15 @@ namespace UI
                 .Content(
                     SEditorGUILayout.Action(() =>
                     {
-                        newIndex = EditorGUILayout.Popup("Type", newIndex, contextNames);
+                        newIndex = EditorGUILayout.Popup("Type", newIndex, names);
                     })
                     + SEditorGUILayout.Var("Prefab", newPrefab)
                         .OnValueChanged(v => newPrefab = v as GameObject)
                     + SEditorGUILayout.Button("+").Width(20)
                         .OnClick(() =>
                         {
-                            if (contextTypes.Count == 0) return;
-                            var type = contextTypes[newIndex];
+                            if (types.Count == 0) return;
+                            var type = types[newIndex];
                             string key = type.AssemblyQualifiedName;
                             if (!table.ContainsKey(key))
                             {
@@ -105,7 +111,7 @@ namespace UI
                 if (!string.IsNullOrEmpty(searchText) && key.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) < 0)
                     continue;
                 Type currentType = Type.GetType(key);
-                int idx = currentType != null ? contextTypes.IndexOf(currentType) : -1;
+                int idx = currentType != null ? types.IndexOf(currentType) : -1;
                 if (idx < 0) idx = 0;
                 elements.Add(
                     SEditorGUILayout.Horizontal()
@@ -113,10 +119,10 @@ namespace UI
                     .Content(
                         SEditorGUILayout.Action(() =>
                         {
-                            int selected = EditorGUILayout.Popup("Type", idx, contextNames);
+                            int selected = EditorGUILayout.Popup("Type", idx, names);
                             if (selected != idx)
                             {
-                                var newType = contextTypes[selected];
+                                var newType = types[selected];
                                 string newKey = newType.AssemblyQualifiedName;
                                 if (!table.ContainsKey(newKey))
                                 {
