@@ -6,9 +6,8 @@ using VContainer;
 namespace Ingame
 {
     [RequireComponent(typeof(DropItemScope))]
-    public class DropItemController : ControllerBaseBehaviour
+    public class DropItemController : ItemControllerBase
     {
-        [Inject] public readonly ItemModel itemModel;
         [Inject] public readonly DropItemView itemView;
         [Inject] private readonly Rigidbody rigidbody;
         [Inject] private readonly SphereCollider sphereCollider;

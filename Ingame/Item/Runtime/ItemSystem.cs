@@ -13,10 +13,24 @@ namespace Ingame
     public class ItemSystem : Singleton<ItemSystem>
     {
         private List<DropItemController> _dropItemControllers = new();
+        [System.Obsolete("Use ItemControllers instead")]
         public IEnumerable<DropItemController> DropItemControllers => _dropItemControllers.Where(c => c != null);
 
         private List<HeldItemController> _heldItemControllers = new();
+        [System.Obsolete("Use ItemControllers instead")]
         public IEnumerable<HeldItemController> HeldItemControllers => _heldItemControllers.Where(c => c != null);
+
+        private List<ItemControllerBase> _itemControllers = new();
+        public IEnumerable<ItemControllerBase> ItemControllers => _itemControllers.Where(c => c != null);
+
+        public void Remove(ItemControllerBase controller)
+        {
+            if (controller is DropItemController dropItemController)
+                _dropItemControllers.Remove(dropItemController);
+            if (controller is HeldItemController heldItemController)
+                _heldItemControllers.Remove(heldItemController);
+            _itemControllers.Remove(controller);
+        }
 
         public static HeldItemController SpawnHeldItem(ItemSpawnContext context)
         {
@@ -33,6 +47,7 @@ namespace Ingame
 
             HeldItemController controller = go.GetComponent<HeldItemController>();
             Instance._heldItemControllers.Add(controller);
+            Instance._itemControllers.Add(controller);
 
             return controller;
         }
@@ -59,6 +74,7 @@ namespace Ingame
 
             DropItemController controller = go.GetComponent<DropItemController>();
             Instance._dropItemControllers.Add(controller);
+            Instance._itemControllers.Add(controller);
             return controller;
         }
 
