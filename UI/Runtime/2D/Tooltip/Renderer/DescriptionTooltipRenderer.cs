@@ -23,9 +23,9 @@ namespace UI
             txtDescription.text = $"{description}";
         }
 
-        public void Render(TooltipContext context)
+        public void Render(TooltipModel context)
         {
-            if (context is not DescriptionTooltipContext descriptionContext) return;
+            if (context is not DescriptionTooltipModel descriptionContext) return;
 
             description = descriptionContext.description;
             Render();

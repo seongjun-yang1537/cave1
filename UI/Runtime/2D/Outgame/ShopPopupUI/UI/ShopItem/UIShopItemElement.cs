@@ -33,7 +33,7 @@ namespace UI
         private ShopItemModel shopItemModel;
         #endregion ====================
 
-        private ItemTooltipContext tooltipContext = new();
+        private ItemTooltipModel TooltipModel = new();
 
         public override void Render()
         {
@@ -69,8 +69,8 @@ namespace UI
             if (itemModel == null || itemModel.IsEmpty)
                 return;
 
-            tooltipContext.itemModel = itemModel;
-            TooltipUISystem.Show(tooltipContext);
+            TooltipModel.itemModel = itemModel;
+            TooltipUISystem.Show(TooltipModel);
         }
 
         public void OnPointerExit(PointerEventData eventData)

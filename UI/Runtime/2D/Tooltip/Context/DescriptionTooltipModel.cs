@@ -1,6 +1,6 @@
 namespace UI
 {
-    public class DescriptionTooltipContext : TooltipContext
+    public class DescriptionTooltipModel : TooltipModel
     {
         public string description;
     }

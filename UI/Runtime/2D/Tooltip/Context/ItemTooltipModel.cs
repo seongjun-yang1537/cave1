@@ -1,11 +1,11 @@
-// 파일: ItemTooltipContext.cs
+// 파일: ItemTooltipModel.cs
 using Ingame;
 using UnityEngine;
 
 namespace UI
 {
 
-    public class ItemTooltipContext : TooltipContext
+    public class ItemTooltipModel : TooltipModel
     {
         public ItemModel itemModel;
         public int sellPrice = -1;

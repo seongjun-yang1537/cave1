@@ -66,9 +66,9 @@ namespace UI
             Render();
         }
 
-        public void Render(TooltipContext context)
+        public void Render(TooltipModel context)
         {
-            if (context is not ItemTooltipContext itemContext) return;
+            if (context is not ItemTooltipModel itemContext) return;
             Render(itemContext.itemModel, itemContext.sellPrice);
         }
 

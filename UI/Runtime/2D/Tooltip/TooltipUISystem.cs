@@ -50,7 +50,7 @@ namespace UI
             pool.Push(renderer);
         }
 
-        public static void Show(TooltipContext context)
+        public static void Show(TooltipModel context)
         {
             Hide(null);
 
@@ -72,7 +72,7 @@ namespace UI
             Instance.PositionTooltip(Instance._activeRect);
         }
 
-        public static void Hide(TooltipContext _)
+        public static void Hide(TooltipModel _)
         {
             if (Instance._activeRenderer == null) return;
 

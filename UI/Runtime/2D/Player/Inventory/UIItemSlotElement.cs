@@ -24,7 +24,7 @@ namespace UI
         public InventorySlotModel itemSlot;
         public ItemModel itemModel => itemSlot?.itemModel;
 
-        private ItemTooltipContext tooltipContext = new();
+        private ItemTooltipModel TooltipModel = new();
 
         protected override void OnEnable()
         {
@@ -62,8 +62,8 @@ namespace UI
             if (itemModel == null || itemModel.IsEmpty)
                 return;
 
-            tooltipContext.itemModel = itemModel;
-            TooltipUISystem.Show(tooltipContext);
+            TooltipModel.itemModel = itemModel;
+            TooltipUISystem.Show(TooltipModel);
         }
 
         public void OnPointerExit(PointerEventData eventData)
