@@ -22,6 +22,9 @@ namespace Outgame
                 .As<ShopModel>()
                 .AsSelf();
 
+            builder.Register<PriceCalculator>(Lifetime.Scoped)
+                .As<IPriceCalculator>();
+
             builder.RegisterComponent(GetComponent<ShopController>());
         }
     }
