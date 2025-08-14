@@ -12,7 +12,7 @@ namespace Ingame
         [SerializeField]
         public DataDictionary table = new();
 
-        static string TypeToKey(Type type) => type.AssemblyQualifiedName;
+        private static string TypeToKey(Type type) => type.AssemblyQualifiedName;
 
         public EntityModelData this[Type type]
         {

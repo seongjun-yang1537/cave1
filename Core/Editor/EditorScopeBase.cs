@@ -43,7 +43,7 @@ namespace Core
             ).Render();
         }
 
-        SUIElement RenderModel(TModel model)
+        private SUIElement RenderModel(TModel model)
         {
             if (model == null || !Application.isPlaying) return SUIElement.Empty();
             return SEditorGUILayout.FoldGroup("Model", foldModel)
@@ -53,7 +53,7 @@ namespace Core
             );
         }
 
-        SUIElement RenderModelState(TModelState modelState)
+        private SUIElement RenderModelState(TModelState modelState)
         {
             if (modelState == null || Application.isPlaying) return SUIElement.Empty();
             return SEditorGUILayout.FoldGroup("Model State", foldModelState)
@@ -63,7 +63,7 @@ namespace Core
             );
         }
 
-        SUIElement RenderModelData(TModelData modelData)
+        private SUIElement RenderModelData(TModelData modelData)
         {
             if (modelData == null || Application.isPlaying) return SUIElement.Empty();
             return SEditorGUILayout.FoldGroup("Model Data", foldModelData)
