@@ -35,17 +35,24 @@ namespace Ingame
         public static HeldItemController SpawnHeldItem(ItemSpawnContext context)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
-            HeldItemScope prefabScope = prefab.GetComponent<HeldItemScope>();
-            prefabScope.itemModel = context.itemModel;
 
             GameObject go = Instantiate(prefab);
+            go.SetActive(false);
+
             go.name = $"[HeldItem]{context.itemID}";
 
             Transform tr = go.transform;
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            HeldItemController controller = go.GetComponent<HeldItemController>();
+            go.AddComponent<HeldItemView>();
+            var controller = go.AddComponent<HeldItemController>();
+
+            var scope = go.AddComponent<HeldItemScope>();
+            scope.itemModel = context.itemModel;
+
+            go.SetActive(true);
+
             Instance._heldItemControllers.Add(controller);
             Instance._itemControllers.Add(controller);
 
@@ -62,17 +69,24 @@ namespace Ingame
         public static DropItemController SpawnDropItem(ItemSpawnContext context)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
-            DropItemScope prefabScope = prefab.GetComponent<DropItemScope>();
-            prefabScope.itemModel = context.itemModel;
 
             GameObject go = Instantiate(prefab);
+            go.SetActive(false);
+
             go.name = $"[DropItem]{context.itemID}";
 
             Transform tr = go.transform;
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            DropItemController controller = go.GetComponent<DropItemController>();
+            go.AddComponent<DropItemView>();
+            var controller = go.AddComponent<DropItemController>();
+
+            var scope = go.AddComponent<DropItemScope>();
+            scope.itemModel = context.itemModel;
+
+            go.SetActive(true);
+
             Instance._dropItemControllers.Add(controller);
             Instance._itemControllers.Add(controller);
             return controller;
