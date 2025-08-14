@@ -19,7 +19,7 @@ public class DebugConsole : MonoBehaviour
 
     private bool _visible;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -32,7 +32,7 @@ public class DebugConsole : MonoBehaviour
         consoleRoot.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {

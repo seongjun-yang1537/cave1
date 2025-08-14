@@ -20,13 +20,13 @@ namespace Ingame
         public CinemachineVirtualCamera thirdPersonVCamera;
         private PlayerController player;
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (player != null)
                 player.onViewLockChanged.RemoveListener(OnViewLockChanged);
         }
 
-        void OnViewLockChanged(bool locked)
+        private void OnViewLockChanged(bool locked)
         {
             CinemachineControlSetting.SetViewLocked(locked);
         }
