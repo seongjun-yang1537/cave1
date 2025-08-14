@@ -17,6 +17,7 @@ namespace Ingame
         [Inject] private readonly IAimTargetProvider aimTargetProvider;
         [Inject] protected readonly IAgentAttackable agentAttackable;
         [Inject] protected readonly IAgentExplodable agentExplodable;
+        [Inject] public readonly HandController handController;
 
         [ModelSourceBase]
         public AgentModel agentModel;

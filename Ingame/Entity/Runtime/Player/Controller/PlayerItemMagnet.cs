@@ -9,7 +9,7 @@ namespace Ingame
         private readonly PlayerController playerController;
         private Vector3 centerPosition => playerController.transform.position + Vector3.up * 1.5f;
 
-        private float magnetRange = 15f;
+        private float magnetRange = 2.5f;
         private float magnetSpeed = 5f;
         private readonly List<DropItemController> _collectingItems = new();
 

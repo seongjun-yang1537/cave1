@@ -16,6 +16,10 @@ namespace Ingame
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(GetComponent<Rigidbody>())
+                .AsSelf();
+            builder.RegisterComponent(GetComponent<SphereCollider>())
+                .AsSelf();
             builder.RegisterComponent(transform)
                 .AsSelf();
 

@@ -11,6 +11,7 @@ namespace Ingame
             base.Configure(builder);
             RegisterAttackable(builder);
             RegisterExploablable(builder);
+            builder.RegisterComponent(GetComponentInChildren<HandController>());
         }
 
         protected virtual void RegisterAttackable(IContainerBuilder builder)

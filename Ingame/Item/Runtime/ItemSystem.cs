@@ -45,10 +45,10 @@ namespace Ingame
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            go.AddComponent<HeldItemView>();
-            var controller = go.AddComponent<HeldItemController>();
-
             var scope = go.AddComponent<HeldItemScope>();
+            var controller = go.AddComponent<HeldItemController>();
+            go.AddComponent<HeldItemView>();
+
             scope.itemModel = context.itemModel;
 
             go.SetActive(true);
@@ -79,10 +79,10 @@ namespace Ingame
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            go.AddComponent<DropItemView>();
-            var controller = go.AddComponent<DropItemController>();
-
             var scope = go.AddComponent<DropItemScope>();
+            var controller = go.AddComponent<DropItemController>();
+            go.AddComponent<DropItemView>();
+
             scope.itemModel = context.itemModel;
 
             go.SetActive(true);

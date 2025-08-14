@@ -39,7 +39,7 @@ namespace Ingame
         }
 
         [AutoSubscribe(nameof(onDropItem))]
-        protected override void OnDropItem(PawnController pawnController, ItemModel itemModel)
+        protected override void OnDropItem(AgentController agentController, ItemModel itemModel)
         {
             DropItemByForward(itemModel, mainCamera.transform.forward);
         }

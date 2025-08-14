@@ -11,7 +11,6 @@ namespace Ingame
             base.Configure(builder);
 
             builder.RegisterComponent(GetComponent<CharacterController>());
-            builder.RegisterComponent(GetComponentInChildren<HandController>());
         }
     }
 }

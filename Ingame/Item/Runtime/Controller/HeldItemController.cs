@@ -9,10 +9,14 @@ namespace Ingame
     public class HeldItemController : ItemControllerBase
     {
         [Inject] public readonly HeldItemView itemView;
+        [Inject] private readonly Rigidbody rigidbody;
+        [Inject] private readonly SphereCollider sphereCollider;
 
         protected override void Awake()
         {
             base.Awake();
+            rigidbody.isKinematic = true;
+            sphereCollider.enabled = false;
             gameObject.SetLayerRecursively(LayerMask.NameToLayer("Entity"));
         }
     }
