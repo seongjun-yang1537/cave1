@@ -6,9 +6,8 @@ using VContainer;
 namespace Ingame
 {
     [RequireComponent(typeof(HeldItemScope))]
-    public class HeldItemController : ControllerBaseBehaviour
+    public class HeldItemController : ItemControllerBase
     {
-        [Inject] public readonly ItemModel itemModel;
         [Inject] public readonly HeldItemView itemView;
 
         protected override void Awake()
