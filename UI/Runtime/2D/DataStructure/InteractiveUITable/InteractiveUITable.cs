@@ -25,7 +25,7 @@ namespace UI
         public GameObject GetContext(Type type) => Get(contextTable, type);
 
         public GameObject GetTooltip<T>() where T : TooltipModel => GetTooltip(typeof(T));
-        public GameObject GetContext<T>() where T : ContextUIContext => GetContext(typeof(T));
+        public GameObject GetContext<T>() where T : ContextUIModel => GetContext(typeof(T));
 
         public void AddTooltip(Type type, GameObject prefab) => tooltipTable[TypeToKey(type)] = prefab;
         public void AddContext(Type type, GameObject prefab) => contextTable[TypeToKey(type)] = prefab;

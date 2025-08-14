@@ -5,7 +5,7 @@ namespace UI
     public interface IContextUIRenderer
     {
         GameObject gameObject { get; }
-        void Render(ContextUIContext context);
+        void Render(ContextUIModel context);
         void Show();
         void Hide();
     }

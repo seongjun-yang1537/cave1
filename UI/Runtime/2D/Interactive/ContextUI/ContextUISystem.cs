@@ -45,7 +45,7 @@ namespace UI
             pool.Push(renderer);
         }
 
-        public static void Show(ContextUIContext context)
+        public static void Show(ContextUIModel context)
         {
             Hide(null);
             var ctxType = context.GetType();
@@ -64,7 +64,7 @@ namespace UI
             Instance.Position(Instance.activeRect);
         }
 
-        public static void Hide(ContextUIContext _)
+        public static void Hide(ContextUIModel _)
         {
             if (Instance.activeRenderer == null) return;
             Instance.activeRenderer.Hide();

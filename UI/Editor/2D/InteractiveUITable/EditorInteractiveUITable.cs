@@ -38,7 +38,7 @@ namespace UI
             tooltipTypes = allTypes.Where(t => t.IsSubclassOf(typeof(TooltipModel)) && !t.IsAbstract).OrderBy(t => t.Name).ToList();
             tooltipNames = tooltipTypes.Select(t => t.Name).ToArray();
 
-            contextTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ContextUIContext)) && !t.IsAbstract).OrderBy(t => t.Name).ToList();
+            contextTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ContextUIModel)) && !t.IsAbstract).OrderBy(t => t.Name).ToList();
             contextNames = contextTypes.Select(t => t.Name).ToArray();
         }
 

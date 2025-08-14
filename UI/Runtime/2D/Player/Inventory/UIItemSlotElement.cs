@@ -37,7 +37,7 @@ namespace UI
         {
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public virtual void OnPointerDown(PointerEventData eventData)
         {
             onClick.Invoke();
         }

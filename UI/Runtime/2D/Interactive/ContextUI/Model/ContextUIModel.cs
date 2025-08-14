@@ -1,6 +1,6 @@
 namespace UI
 {
-    public abstract class ContextUIContext
+    public abstract class ContextUIModel
     {
         public int priority = 0;
     }

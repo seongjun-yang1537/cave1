@@ -9,8 +9,22 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class UIShopQuickSlotElement : UIBagSlotElement
+    public class UIShopQuickSlotElement : UIQuickSlotElement
     {
-
+        public override void OnPointerDown(PointerEventData eventData)
+        {
+            base.OnPointerDown(eventData);
+            switch (eventData.button)
+            {
+                case PointerEventData.InputButton.Right:
+                    var contextModel = new ShopSellContextUIModel()
+                    {
+                        count = 1,
+                        price = 1000,
+                    };
+                    ContextUISystem.Show(contextModel);
+                    break;
+            }
+        }
     }
 }

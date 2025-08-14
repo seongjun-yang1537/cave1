@@ -10,6 +10,7 @@ namespace UI
     {
         DynamicUITable table;
         string[] options = Array.Empty<string>();
+        int selectedIndex;
 
         void EnsureLoaded()
         {
@@ -33,21 +34,14 @@ namespace UI
 
             if (options.Length > 0)
             {
-                var selectedIndex = 0;
-                if (property.objectReferenceValue != null)
-                {
-                    var name = property.objectReferenceValue.name;
-                    var index = Array.FindIndex(options, o => o == name);
-                    if (index >= 0)
-                        selectedIndex = index;
-                }
-
                 selectedIndex = EditorGUI.Popup(dropdownRect, selectedIndex, options);
                 if (GUI.Button(buttonRect, "Apply"))
                 {
                     string key = options[selectedIndex];
                     var prefab = table[key];
                     property.objectReferenceValue = prefab;
+
+                    property.serializedObject.ApplyModifiedProperties();
                 }
             }
             else
