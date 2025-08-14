@@ -1,4 +1,5 @@
 using Core;
+using Corelib.Utils;
 using UnityEngine;
 using VContainer;
 
@@ -11,7 +12,7 @@ namespace Ingame
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            if(ItemSystem.Instance != null)
+            if (ItemSystem.Instance != null)
                 ItemSystem.Instance.Remove(this);
         }
     }

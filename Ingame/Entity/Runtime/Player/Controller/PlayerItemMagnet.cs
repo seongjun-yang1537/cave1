@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Ingame
@@ -30,7 +31,10 @@ namespace Ingame
 
         private void UpdateTrackingDroppedItems()
         {
-            foreach (var itemController in ItemSystem.Instance.ItemControllers)
+            var dropItemControllers = ItemSystem.Instance.ItemControllers
+                .Where(ic => ic is DropItemController)
+                .Select(ic => ic as DropItemController);
+            foreach (var itemController in dropItemControllers)
             {
                 if (!itemController.itemModel.isAcquireable)
                     continue;
