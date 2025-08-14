@@ -12,13 +12,16 @@ namespace Ingame
 {
     public class ItemSystem : Singleton<ItemSystem>
     {
-        private List<DropItemController> _itemControllers = new();
-        public IEnumerable<DropItemController> ItemControllers => _itemControllers.Where(c => c != null);
+        private List<DropItemController> _dropItemControllers = new();
+        public IEnumerable<DropItemController> DropItemControllers => _dropItemControllers.Where(c => c != null);
 
-        public static DropItemController SpawnHeldItem(ItemSpawnContext context)
+        private List<HeldItemController> _heldItemControllers = new();
+        public IEnumerable<HeldItemController> HeldItemControllers => _heldItemControllers.Where(c => c != null);
+
+        public static HeldItemController SpawnHeldItem(ItemSpawnContext context)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
-            DropItemScope prefabScope = prefab.GetComponent<DropItemScope>();
+            HeldItemScope prefabScope = prefab.GetComponent<HeldItemScope>();
             prefabScope.itemModel = context.itemModel;
 
             GameObject go = Instantiate(prefab);
@@ -28,13 +31,13 @@ namespace Ingame
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            DropItemController controller = go.GetComponent<DropItemController>();
-            Instance._itemControllers.Add(controller);
+            HeldItemController controller = go.GetComponent<HeldItemController>();
+            Instance._heldItemControllers.Add(controller);
 
             return controller;
         }
 
-        public static DropItemController SpawnHeldItem(Vector3 position, ItemModel itemModel)
+        public static HeldItemController SpawnHeldItem(Vector3 position, ItemModel itemModel)
             => SpawnHeldItem(ItemSpawnContext.Builder()
                 .SetPosition(position)
                 .SetItemModel(itemModel)
@@ -55,7 +58,7 @@ namespace Ingame
             tr.position = context.position;
 
             DropItemController controller = go.GetComponent<DropItemController>();
-            Instance._itemControllers.Add(controller);
+            Instance._dropItemControllers.Add(controller);
             return controller;
         }
 
