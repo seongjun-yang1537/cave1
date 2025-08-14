@@ -17,6 +17,9 @@ namespace Outgame
         [Inject, ModelSourceBase]
         private readonly ShopModel shopModel;
 
+        [Inject]
+        private readonly IPriceCalculator _priceCalculator;
+
         #region ========== ShopBoard Interface ==========
         public UnityEvent OnUpdateShop => shopModel.onUpdateShop;
 
@@ -74,13 +77,17 @@ namespace Outgame
         {
             if (!CanBuyShopItem(playerController, shopItemModel))
                 return;
+
+            var price = _priceCalculator.GetPrice(shopItemModel);
+
             shopModel.BuyShopItem(shopItemModel);
-            playerController.SpendGold(1000);
+            playerController.SpendGold(price);
         }
 
         public bool CanBuyShopItem(PlayerController playerController, ShopItemModel shopItemModel)
         {
-            return playerController.playerModel.gold >= 1000;
+            var price = _priceCalculator.GetPrice(shopItemModel);
+            return playerController.playerModel.gold >= price;
         }
 
         public void TogglePopupUI(PlayerController playerController)
