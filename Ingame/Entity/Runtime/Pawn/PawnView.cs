@@ -47,8 +47,11 @@ namespace Ingame
         {
             heldItemSocket.DestroyAllChild();
 
+            if (itemModel == null)
+                return;
+
             Vector3 spawnPosition = heldItemSocket.position;
-            DropItemController itemController = ItemSystem.SpawnHeldItem(spawnPosition, itemModel);
+            HeldItemController itemController = ItemSystem.SpawnHeldItem(spawnPosition, itemModel);
 
             GameObject go = itemController.gameObject;
             Transform tr = go.transform;
