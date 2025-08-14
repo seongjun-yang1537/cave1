@@ -103,6 +103,26 @@ namespace Ingame
             agentModel.UseItem(itemModel);
         }
 
+        public virtual void AcquireItem(ItemModel itemModel)
+        {
+            agentModel.inventory.AddItem(itemModel);
+        }
+
+        public virtual void DiscardItem(ItemModel itemModel)
+        {
+            agentModel.inventory.RemoveItem(itemModel);
+        }
+
+        public virtual void ChangeHeldItem(InventorySlotModel itemSlot)
+        {
+            agentModel.SetHeldItem(itemSlot);
+        }
+
+        public virtual void DropItem(InventorySlotModel itemSlot)
+        {
+            agentModel.DropItem(itemSlot);
+        }
+
         public virtual float TakeDamage(AgentModel other, float damage)
         {
             damage = agentModel.TakeDamage(other, damage);
@@ -207,6 +227,14 @@ namespace Ingame
         [AutoModelSubscribe(nameof(AgentModel.onRemoveStatusEffect))]
         protected virtual void OnRemoveStatusEffect(IStatusEffect effect)
             => agentView.onRemoveStatusEffect.Invoke(this, effect);
+
+        [AutoModelSubscribe(nameof(AgentModel.onHeldItem))]
+        protected virtual void OnHeldItem(InventorySlotModel itemSlot)
+            => agentView.onHeldItem.Invoke(this, itemSlot.itemModel);
+
+        [AutoModelSubscribe(nameof(AgentModel.onDropItem))]
+        protected virtual void OnDropItem(ItemModel itemModel)
+            => agentView.onDropItem.Invoke(this, itemModel);
         #endregion
     }
 }

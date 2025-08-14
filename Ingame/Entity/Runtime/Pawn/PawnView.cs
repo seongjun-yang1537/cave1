@@ -8,12 +8,6 @@ namespace Ingame
     public class PawnView : AgentView
     {
         public readonly UnityEvent<PawnController, PawnPoseState> onPoseState = new();
-        public readonly UnityEvent<PawnController, ItemModel> onHeldItem = new();
-        public readonly UnityEvent<PawnController, ItemModel> onDropItem = new();
-
-        public float dropForce = 100.0f;
-
-        public Transform heldItemSocket;
 
         protected Vector3 deltaPosition;
         private Vector3 prevPosition;
@@ -25,40 +19,6 @@ namespace Ingame
         }
 
         #region View Event Callback
-        [AutoSubscribe(nameof(onDropItem))]
-        protected virtual void OnDropItem(PawnController pawnController, ItemModel itemModel)
-        {
-            DropItemByForward(itemModel, transform.forward);
-        }
-
-        protected void DropItemByForward(ItemModel itemModel, Vector3 forward)
-        {
-            Vector3 spawnPositoin = transform.position + 1.5f * Vector3.up;
-            DropItemController itemController = ItemSystem.SpawnDropItem(spawnPositoin, itemModel);
-
-            GameObject go = itemController.gameObject;
-
-            Rigidbody rigidbody = go.GetComponent<Rigidbody>();
-            rigidbody.AddForce(forward * dropForce, ForceMode.Impulse);
-        }
-
-        [AutoSubscribe(nameof(onHeldItem))]
-        protected virtual void OnHeldItem(PawnController pawnController, ItemModel itemModel)
-        {
-            heldItemSocket.DestroyAllChild();
-
-            if (itemModel == null)
-                return;
-
-            Vector3 spawnPosition = heldItemSocket.position;
-            HeldItemController itemController = ItemSystem.SpawnHeldItem(spawnPosition, itemModel);
-
-            GameObject go = itemController.gameObject;
-            Transform tr = go.transform;
-            tr.SetParent(heldItemSocket);
-            tr.ResetLocal();
-        }
-
         [AutoSubscribe(nameof(onAttack))]
         protected virtual void OnAttack(AgentController agentController, AgentController other, float damage)
         {

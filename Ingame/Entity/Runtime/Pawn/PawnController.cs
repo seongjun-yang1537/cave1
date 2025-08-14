@@ -15,7 +15,6 @@ namespace Ingame
         public PawnView pawnView;
 
         [Inject] protected readonly CharacterController characterController;
-        [Inject] public readonly HandController handController;
 
         [Inject] protected readonly IMoveable moveable;
 
@@ -45,16 +44,6 @@ namespace Ingame
         #endregion
 
         #region Action
-        public virtual void AcquireItem(ItemModel itemModel)
-        {
-            pawnModel.inventory.AddItem(itemModel);
-        }
-
-        public virtual void DiscardItem(ItemModel itemModel)
-        {
-            pawnModel.inventory.RemoveItem(itemModel);
-        }
-
         public virtual void UpdateMovement()
         {
             if (moveable == null) return;
@@ -79,16 +68,6 @@ namespace Ingame
         public virtual bool IsGrounded()
         {
             return moveable?.IsGrounded() ?? false;
-        }
-
-        public virtual void ChangeHeldItem(InventorySlotModel itemSlot)
-        {
-            pawnModel.SetHeldItem(itemSlot);
-        }
-
-        public virtual void DropItem(InventorySlotModel itemSlot)
-        {
-            pawnModel.DropItem(itemSlot);
         }
 
         public virtual void ChangePose(PawnPoseState poseState)
@@ -122,14 +101,6 @@ namespace Ingame
         [AutoModelSubscribe(nameof(PawnModel.onPoseState))]
         protected virtual void OnPoseState(PawnPoseState poseState)
             => pawnView.onPoseState.Invoke(this, poseState);
-
-        [AutoModelSubscribe(nameof(PawnModel.onHeldItem))]
-        protected virtual void OnHeldItem(InventorySlotModel itemSlot)
-            => pawnView.onHeldItem.Invoke(this, itemSlot.itemModel);
-
-        [AutoModelSubscribe(nameof(PawnModel.onDropItem))]
-        protected virtual void OnDropItem(ItemModel itemModel)
-            => pawnView.onDropItem.Invoke(this, itemModel);
         #endregion
     }
 }
