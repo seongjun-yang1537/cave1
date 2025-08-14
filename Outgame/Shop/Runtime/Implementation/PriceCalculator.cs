@@ -30,7 +30,7 @@ namespace Outgame
 
         public int GetPrice(ShopItemModel shopItemModel)
         {
-            if (PriceTable.TryGetValue(shopItemModel.itemModel.Data.id, out var price))
+            if (PriceTable.TryGetValue(shopItemModel.itemModel.Data.itemID, out var price))
             {
                 return price;
             }
