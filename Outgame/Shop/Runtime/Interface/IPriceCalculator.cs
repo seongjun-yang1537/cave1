@@ -4,6 +4,6 @@ namespace Outgame
 {
     public interface IPriceCalculator
     {
-        int GetPrice(ItemModel shopItemModel);
+        int GetPrice(ItemModel itemModel);
     }
 }

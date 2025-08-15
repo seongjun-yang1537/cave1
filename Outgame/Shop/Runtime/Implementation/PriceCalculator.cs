@@ -35,6 +35,7 @@ namespace Outgame
                 return price;
             }
 
+            // Return a default price for items not in the table
             return 100;
         }
     }

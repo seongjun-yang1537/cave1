@@ -24,12 +24,7 @@ namespace Outgame
         public UnityEvent OnUpdateShop => shopModel.onUpdateShop;
 
         public UnityAction<PlayerController, ShopItemModel> OnBuyShopItem => BuyShopItem;
-        public List<ShopItemModel> StockItems
-         => shopModel.stockItems.Select(item =>
-         {
-             item.price = priceCalculator.GetPrice(item.itemModel);
-             return item;
-         }).ToList();
+        public List<ShopItemModel> StockItems => shopModel.stockItems;
         #endregion ====================
 
         #region ========== View ==========
@@ -83,7 +78,7 @@ namespace Outgame
             if (!CanBuyShopItem(playerController, shopItemModel))
                 return;
 
-            var price = priceCalculator.GetPrice(shopItemModel);
+            var price = priceCalculator.GetPrice(shopItemModel.itemModel);
 
             shopModel.BuyShopItem(shopItemModel);
             playerController.SpendGold(price);
@@ -91,7 +86,7 @@ namespace Outgame
 
         public bool CanBuyShopItem(PlayerController playerController, ShopItemModel shopItemModel)
         {
-            var price = priceCalculator.GetPrice(shopItemModel);
+            var price = priceCalculator.GetPrice(shopItemModel.itemModel);
             return playerController.playerModel.gold >= price;
         }
 
@@ -99,5 +94,8 @@ namespace Outgame
         {
             ShopServiceLocator.UIHandler.ToggleShopPopup(this, playerController);
         }
+
+        public int CalculatePrice(ItemModel itemModel)
+            => priceCalculator.GetPrice(itemModel);
     }
 }

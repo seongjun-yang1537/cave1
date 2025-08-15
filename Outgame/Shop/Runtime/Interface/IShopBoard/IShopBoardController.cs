@@ -14,5 +14,9 @@ namespace Outgame
         #region ========== Property ==========
         public List<ShopItemModel> StockItems { get; }
         #endregion ====================
+
+        #region Function
+        public int CalculatePrice(ItemModel itemModel);
+        #endregion
     }
 }
