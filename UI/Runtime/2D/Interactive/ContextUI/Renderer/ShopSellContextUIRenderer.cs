@@ -76,6 +76,7 @@ namespace UI
                 slotModel = slotModel,
                 count = 1,
             });
+            ContextUISystem.Hide(null);
         }
 
         private void OnButtonMultiple()
@@ -85,6 +86,7 @@ namespace UI
                 slotModel = slotModel,
                 count = slotModel.itemModel.count,
             });
+            ContextUISystem.Hide(null);
         }
     }
 }
