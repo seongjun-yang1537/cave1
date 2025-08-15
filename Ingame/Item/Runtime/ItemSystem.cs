@@ -25,7 +25,7 @@ namespace Ingame
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
             WorldItemScope prefabScope = prefab.GetComponent<WorldItemScope>();
             {
-                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemID, context.count);
+                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemModel);
                 prefabScope.worldItemType = WorldItemType.HeldItem;
             }
 
@@ -61,7 +61,7 @@ namespace Ingame
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
             WorldItemScope prefabScope = prefab.GetComponent<WorldItemScope>();
             {
-                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemID, context.count);
+                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemModel);
                 prefabScope.worldItemType = WorldItemType.DropItem;
             }
 
