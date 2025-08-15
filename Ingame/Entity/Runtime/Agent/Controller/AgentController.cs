@@ -113,6 +113,12 @@ namespace Ingame
         {
             agentModel.inventory.RemoveItem(itemModel);
         }
+        public virtual void DiscardItem(InventoryContainerType containerType, int slotID, int amount)
+        {
+
+        }
+        public void DiscardItem(InventorySlotModel slotModel, int amount)
+            => DiscardItem(slotModel.ownerContainer, slotModel.slotID, amount);
 
         public virtual void ChangeHeldItem(InventorySlotModel itemSlot)
         {

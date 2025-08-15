@@ -63,14 +63,14 @@ namespace UI
                 case UIShopItemElementEventBus:
                     {
                         var bus = eventBus as UIShopItemElementEventBus;
-                        shopBoardController.OnBuyShopItem(playerController, bus.targetItem);
+                        shopBoardController.BuyShopItem(playerController, bus.targetItem);
                     }
                     break;
                 case ShopSellContextUIEventBus:
                     {
                         var bus = eventBus as ShopSellContextUIEventBus;
                         int count = bus.count;
-                        Debug.Log($"{bus.slotModel.itemModel.itemID} {bus.count}");
+                        shopBoardController.SellItem(playerController, bus.slotModel, bus.count);
                     }
                     break;
             }
@@ -90,16 +90,33 @@ namespace UI
             visible = newVisible;
             onVisible.Invoke(newVisible);
         }
+
         private void OnUpdateShop()
             => view.onUpdateShop.Invoke(shopBoardController.StockItems);
         private void OnChangedBagSlot(InventorySlotModel itemSlot)
-            => view.onChangedBagSlot.Invoke(itemSlot);
+        {
+            itemSlot.itemModel.sellPrice = shopBoardController.CalculatePrice(itemSlot.itemModel);
+            view.onChangedBagSlot.Invoke(itemSlot);
+        }
         private void OnRenderBagContainer(BagContainer bagContainer)
-            => view.onRenderBagContainer.Invoke(bagContainer);
+        {
+            foreach (var itemSlot in bagContainer)
+                itemSlot.itemModel.sellPrice = shopBoardController.CalculatePrice(itemSlot.itemModel);
+
+            view.onRenderBagContainer.Invoke(bagContainer);
+        }
         private void OnChangedQuickSlot(InventorySlotModel itemSlot)
-            => view.onChangedQuickSlot.Invoke(itemSlot);
+        {
+            itemSlot.itemModel.sellPrice = shopBoardController.CalculatePrice(itemSlot.itemModel);
+            view.onChangedQuickSlot.Invoke(itemSlot);
+        }
         private void OnRenderQuickSlotContainer(QuickSlotContainer quickSlotContainer)
-            => view.onRenderQuickSlotContainer.Invoke(quickSlotContainer);
+        {
+            foreach (var itemSlot in quickSlotContainer)
+                itemSlot.itemModel.sellPrice = shopBoardController.CalculatePrice(itemSlot.itemModel);
+
+            view.onRenderQuickSlotContainer.Invoke(quickSlotContainer);
+        }
 
         private void OnUpdateGold(int gold)
             => view.onUpdateGold.Invoke(gold);

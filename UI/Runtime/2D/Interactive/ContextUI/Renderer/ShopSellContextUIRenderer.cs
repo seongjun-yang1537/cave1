@@ -45,7 +45,7 @@ namespace UI
             txtOne.text = $"1개 판매 (${price})";
 
             btnMultiple.gameObject.SetActive(count > 1);
-            txtMultiple.text = $"{count}개 판매 (${price * 64})";
+            txtMultiple.text = $"{count}개 판매 (${price * count})";
         }
 
         public void Render(ContextUIModel context)

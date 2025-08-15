@@ -20,7 +20,7 @@ namespace UI
                     var contextModel = new ShopSellContextUIModel(this)
                     {
                         slotModel = itemSlot,
-                        price = 1000,
+                        price = itemSlot.itemModel.sellPrice,
                     };
                     ContextUISystem.Show(contextModel);
                     break;

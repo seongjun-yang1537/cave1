@@ -22,8 +22,6 @@ namespace Outgame
 
         #region ========== ShopBoard Interface ==========
         public UnityEvent OnUpdateShop => shopModel.onUpdateShop;
-
-        public UnityAction<PlayerController, ShopItemModel> OnBuyShopItem => BuyShopItem;
         public List<ShopItemModel> StockItems => shopModel.stockItems;
         #endregion ====================
 
@@ -82,6 +80,12 @@ namespace Outgame
 
             shopModel.BuyShopItem(shopItemModel);
             playerController.SpendGold(price);
+        }
+
+        public void SellItem(PlayerController playerController, InventorySlotModel slotModel, int count)
+        {
+            playerController.GainGold(count * priceCalculator.GetPrice(slotModel.itemModel));
+            playerController.DiscardItem(slotModel, count);
         }
 
         public bool CanBuyShopItem(PlayerController playerController, ShopItemModel shopItemModel)
