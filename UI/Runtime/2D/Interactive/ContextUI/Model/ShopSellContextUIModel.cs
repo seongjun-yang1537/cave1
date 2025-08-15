@@ -1,8 +1,10 @@
+using Ingame;
+
 namespace UI
 {
     public class ShopSellContextUIModel : ContextUIModel
     {
-        public int count;
+        public InventorySlotModel slotModel;
         public int price;
     }
 }

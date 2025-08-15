@@ -48,7 +48,6 @@ namespace Ingame
             {
                 Instance.itemControllers.Add(controller);
             }
-            Debug.Log("hihihi");
 
             return controller;
         }

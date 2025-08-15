@@ -19,7 +19,7 @@ namespace UI
                 case PointerEventData.InputButton.Right:
                     var contextModel = new ShopSellContextUIModel()
                     {
-                        count = 1,
+                        slotModel = itemSlot,
                         price = 1000,
                     };
                     ContextUISystem.Show(contextModel);

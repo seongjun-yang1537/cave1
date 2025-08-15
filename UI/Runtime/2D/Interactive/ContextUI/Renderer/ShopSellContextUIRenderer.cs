@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using TriInspector;
 using Corelib.Utils;
+using Ingame;
 
 namespace UI
 {
@@ -19,11 +20,27 @@ namespace UI
         private TextMeshProUGUI txtMultiple;
 
         [Group("Placeholder"), SerializeField]
-        private int count;
+        private InventorySlotModel slotModel;
+        [Group("Placeholder"), SerializeField]
         private int price;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            btnOne.onClick.AddListener(OnButtonOne);
+            btnMultiple.onClick.AddListener(OnButtonMultiple);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            btnOne.onClick.RemoveListener(OnButtonOne);
+            btnMultiple.onClick.RemoveListener(OnButtonMultiple);
+        }
 
         public override void Render()
         {
+            int count = slotModel.itemModel.count;
             btnOne.gameObject.SetActive(count > 0);
             txtOne.text = $"1개 판매 (${price})";
 
@@ -35,7 +52,7 @@ namespace UI
         {
             if (context is not ShopSellContextUIModel shopSellContext) return;
 
-            this.count = shopSellContext.count;
+            this.slotModel = shopSellContext.slotModel;
             this.price = shopSellContext.price;
             Render();
         }
@@ -48,6 +65,16 @@ namespace UI
         public void Hide()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnButtonOne()
+        {
+
+        }
+
+        private void OnButtonMultiple()
+        {
+
         }
     }
 }
