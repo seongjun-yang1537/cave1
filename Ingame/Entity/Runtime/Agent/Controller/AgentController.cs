@@ -115,7 +115,11 @@ namespace Ingame
         }
         public virtual void DiscardItem(InventoryContainerType containerType, int slotID, int amount)
         {
-
+            IItemContainer container = agentModel.inventory.GetContainer(containerType);
+            if (container == null) return;
+            InventorySlotModel slot = container.GetSlot(slotID);
+            if (slot == null || slot.itemModel == null || slot.itemModel.IsEmpty) return;
+            container.TakeToSlot(slotID, amount);
         }
         public void DiscardItem(InventorySlotModel slotModel, int amount)
             => DiscardItem(slotModel.ownerContainer, slotModel.slotID, amount);
