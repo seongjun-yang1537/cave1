@@ -5,10 +5,10 @@ using VContainer;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(DropItemScope))]
-    public class DropItemController : ItemControllerBase
+    [RequireComponent(typeof(WorldItemScope))]
+    public class WorldItemController : ItemControllerBase
     {
-        [Inject] public readonly DropItemView itemView;
+        [Inject] public readonly WorldItemView itemView;
         [Inject] private readonly Rigidbody rigidbody;
         [Inject] private readonly SphereCollider sphereCollider;
         public float spawnTime;
@@ -38,4 +38,3 @@ namespace Ingame
         }
     }
 }
-
