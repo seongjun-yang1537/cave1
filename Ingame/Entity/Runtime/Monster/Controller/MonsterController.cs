@@ -132,7 +132,7 @@ namespace Ingame
                 List<ItemModel> drops = monsterModel.dropTable.GenerateDrops();
                 foreach (var drop in drops)
                 {
-                    WorldItemController controller = ItemSystem.SpawnWorldItem(transform.position, drop);
+                    WorldItemController controller = ItemSystem.SpawnWorldItem(transform.position, drop, WorldItemMode.Drop);
                     controller.Leap();
                 }
             }

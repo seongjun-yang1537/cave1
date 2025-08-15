@@ -23,17 +23,18 @@ namespace Ingame
         public readonly UnityEvent<AgentController, IStatusEffect> onApplyStatusEffect = new();
         public readonly UnityEvent<AgentController, IStatusEffect> onRemoveStatusEffect = new();
 
-        public readonly UnityEvent<AgentController, ItemModel> onWorldItemChanged = new();
+        public readonly UnityEvent<AgentController, ItemModel, WorldItemMode> onWorldItemChanged = new();
 
         public float dropForce = 100.0f;
 
         public Transform heldItemSocket;
 
         #region View Event Callback
+
         [AutoSubscribe(nameof(onWorldItemChanged))]
-        protected virtual void OnWorldItemChanged(AgentController agentController, ItemModel itemModel)
+        protected virtual void OnWorldItemChanged(AgentController agentController, ItemModel itemModel, WorldItemMode mode)
         {
-            if (itemModel.isDropped)
+            if (mode == WorldItemMode.Drop)
             {
                 DropItemByForward(itemModel, transform.forward);
             }
@@ -45,7 +46,7 @@ namespace Ingame
                     return;
 
                 Vector3 spawnPosition = heldItemSocket.position;
-                WorldItemController itemController = ItemSystem.SpawnWorldItem(spawnPosition, itemModel, WorldItemController.Mode.Held);
+                WorldItemController itemController = ItemSystem.SpawnWorldItem(spawnPosition, itemModel, WorldItemMode.Held);
 
                 GameObject go = itemController.gameObject;
                 Transform tr = go.transform;
@@ -57,7 +58,7 @@ namespace Ingame
         protected void DropItemByForward(ItemModel itemModel, Vector3 forward)
         {
             Vector3 spawnPositoin = transform.position + 1.5f * Vector3.up;
-            WorldItemController itemController = ItemSystem.SpawnWorldItem(spawnPositoin, itemModel);
+            WorldItemController itemController = ItemSystem.SpawnWorldItem(spawnPositoin, itemModel, WorldItemMode.Drop);
 
             GameObject go = itemController.gameObject;
 

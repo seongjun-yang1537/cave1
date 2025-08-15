@@ -38,10 +38,13 @@ namespace Ingame
             }
         }
 
-        [AutoSubscribe(nameof(onDropItem))]
-        protected override void OnDropItem(AgentController agentController, ItemModel itemModel)
+        [AutoSubscribe(nameof(onWorldItemChanged))]
+        protected override void OnWorldItemChanged(AgentController agentController, ItemModel itemModel, WorldItemMode mode)
         {
-            DropItemByForward(itemModel, mainCamera.transform.forward);
+            if (mode == WorldItemMode.Drop)
+            {
+                DropItemByForward(itemModel, mainCamera.transform.forward);
+            }
         }
 
         [AutoSubscribe(nameof(onPoseState))]

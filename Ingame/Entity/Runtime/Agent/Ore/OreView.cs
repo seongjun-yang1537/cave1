@@ -18,7 +18,7 @@ namespace Ingame
         {
             foreach (ItemModel dropItem in dropItems)
             {
-                WorldItemController controller = ItemSystem.SpawnWorldItem(oreController.transform.position, dropItem);
+                WorldItemController controller = ItemSystem.SpawnWorldItem(oreController.transform.position, dropItem, WorldItemMode.Drop);
                 controller.Leap();
             }
         }

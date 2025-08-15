@@ -229,9 +229,13 @@ namespace Ingame
         protected virtual void OnRemoveStatusEffect(IStatusEffect effect)
             => agentView.onRemoveStatusEffect.Invoke(this, effect);
 
-        [AutoModelSubscribe(nameof(AgentModel.onWorldItemChanged))]
-        protected virtual void OnWorldItemChanged(ItemModel itemModel)
-            => agentView.onWorldItemChanged.Invoke(this, itemModel);
+        [AutoModelSubscribe(nameof(AgentModel.onHeldItem))]
+        protected virtual void OnHeldItem(InventorySlotModel itemSlot)
+            => agentView.onWorldItemChanged.Invoke(this, itemSlot.itemModel, WorldItemMode.Held);
+
+        [AutoModelSubscribe(nameof(AgentModel.onDropItem))]
+        protected virtual void OnDropItem(ItemModel itemModel)
+            => agentView.onWorldItemChanged.Invoke(this, itemModel, WorldItemMode.Drop);
         #endregion
     }
 }

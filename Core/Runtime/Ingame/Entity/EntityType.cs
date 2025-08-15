@@ -19,7 +19,7 @@ namespace Ingame
         DragonBoar,
         Knocker,
         PRJ_Melee,
-        WorldItem,
+        DropItem,
         OBJ_Hatch,
         OBJ_Gateway,
         OBJ_FuelTank,

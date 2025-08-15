@@ -9,7 +9,7 @@ namespace Ingame
         #region ========== Input ==========
         public ItemModelData itemModelData;
         public ItemModelState itemModelState;
-        public WorldItemController.Mode initialMode = WorldItemController.Mode.Drop;
+        public WorldItemMode initialMode = WorldItemMode.Drop;
         #endregion ====================
 
         [HideInInspector]

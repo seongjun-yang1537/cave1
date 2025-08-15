@@ -44,7 +44,7 @@ namespace Ingame
             RegisterPool<ProjectileEntityPool>(EntityCategory.Projectile);
             RegisterPool<MonsterEntityPool>(EntityCategory.Monster);
             RegisterPool<OreEntityPool>(EntityCategory.Ore);
-            RegisterPool<WorldItemEntityPool>(EntityCategory.WorldItem);
+            RegisterPool<DropItemEntityPool>(EntityCategory.DropItem);
         }
 
         private void RegisterPool<T>(EntityCategory category) where T : EntityPool
@@ -126,7 +126,7 @@ namespace Ingame
 
             // TODO
             List<Transform> dropItems =
-                Instance.Pools[EntityCategory.WorldItem].transform.Cast<Transform>().ToList();
+                Instance.Pools[EntityCategory.DropItem].transform.Cast<Transform>().ToList();
             foreach (var dropItem in dropItems)
             {
                 Despawn(dropItem.gameObject);

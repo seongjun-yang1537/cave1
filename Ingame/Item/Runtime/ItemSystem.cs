@@ -12,15 +12,15 @@ namespace Ingame
 {
     public class ItemSystem : Singleton<ItemSystem>
     {
-        private List<WorldItemController> _itemControllers = new();
-        public IEnumerable<WorldItemController> ItemControllers => _itemControllers.Where(c => c != null);
+        private List<ItemControllerBase> _itemControllers = new();
+        public IEnumerable<ItemControllerBase> ItemControllers => _itemControllers.Where(c => c != null);
 
-        public void Remove(WorldItemController controller)
+        public void Remove(ItemControllerBase controller)
         {
             _itemControllers.Remove(controller);
         }
 
-        public static WorldItemController SpawnWorldItem(ItemSpawnContext context, WorldItemController.Mode mode = WorldItemController.Mode.Drop)
+        public static WorldItemController SpawnWorldItem(ItemSpawnContext context, WorldItemMode mode)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
 
@@ -43,10 +43,11 @@ namespace Ingame
             go.SetActive(true);
 
             Instance._itemControllers.Add(controller);
+
             return controller;
         }
 
-        public static WorldItemController SpawnWorldItem(Vector3 position, ItemModel itemModel, WorldItemController.Mode mode = WorldItemController.Mode.Drop)
+        public static WorldItemController SpawnWorldItem(Vector3 position, ItemModel itemModel, WorldItemMode mode)
             => SpawnWorldItem(ItemSpawnContext.Builder()
                 .SetPosition(position)
                 .SetItemModel(itemModel)

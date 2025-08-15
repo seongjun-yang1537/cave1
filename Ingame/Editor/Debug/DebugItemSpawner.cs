@@ -21,7 +21,7 @@ namespace Ingame
         {
             ItemModel itemModel = ItemModelFactory.Create(new ItemModelState { itemID = itemID, count = count });
 
-            WorldItemController controller = ItemSystem.SpawnWorldItem(transform.position, itemModel);
+            WorldItemController controller = ItemSystem.SpawnWorldItem(transform.position, itemModel, WorldItemMode.Drop);
             Rigidbody rigidbody = controller.GetComponent<Rigidbody>();
 
             Vector3 upVector = (Random.insideUnitSphere + Vector3.up * 5).normalized;

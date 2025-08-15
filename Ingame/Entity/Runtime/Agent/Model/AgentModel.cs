@@ -35,7 +35,9 @@ namespace Ingame
         public readonly UnityEvent<IStatusEffect> onRemoveStatusEffect = new();
 
         [NonSerialized]
-        public readonly UnityEvent<ItemModel> onWorldItemChanged = new();
+        public readonly UnityEvent<InventorySlotModel> onHeldItem = new();
+        [NonSerialized]
+        public readonly UnityEvent<ItemModel> onDropItem = new();
         #endregion ====================
 
         #region ========== Data ==========
@@ -99,9 +101,7 @@ namespace Ingame
         {
             if (changedSlot == heldItemSlot)
             {
-                var itemModel = changedSlot.itemModel;
-                itemModel.isDropped = false;
-                onWorldItemChanged.Invoke(itemModel);
+                onHeldItem.Invoke(heldItemSlot);
             }
         }
 
@@ -135,9 +135,7 @@ namespace Ingame
         public void SetHeldItem(InventorySlotModel itemSlot)
         {
             heldItemSlot = itemSlot;
-            var itemModel = heldItemSlot.itemModel;
-            itemModel.isDropped = false;
-            onWorldItemChanged.Invoke(itemModel);
+            onHeldItem.Invoke(heldItemSlot);
         }
 
         public void DropItem(InventorySlotModel itemSlot, int count = 1)
@@ -147,15 +145,10 @@ namespace Ingame
             inventory.TakeItem(itemSlot, count);
 
             ItemModel dropItemModel = ItemModelFactory.Create(itemModel.Data, new ItemModelState { count = count });
-            dropItemModel.isDropped = true;
-            onWorldItemChanged.Invoke(dropItemModel);
+            onDropItem.Invoke(dropItemModel);
 
             if (itemSlot == heldItemSlot)
-            {
-                var heldItemModel = heldItemSlot.itemModel;
-                heldItemModel.isDropped = false;
-                onWorldItemChanged.Invoke(heldItemModel);
-            }
+                onHeldItem.Invoke(heldItemSlot);
         }
 
         public float CalculateDamage(AgentModel target, float damage)

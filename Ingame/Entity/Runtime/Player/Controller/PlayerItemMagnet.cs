@@ -34,7 +34,7 @@ namespace Ingame
             var worldItemControllers = ItemSystem.Instance.ItemControllers
                 .Where(ic => ic is WorldItemController)
                 .Select(ic => ic as WorldItemController)
-                .Where(wic => wic.CurrentMode == WorldItemController.Mode.Drop);
+                .Where(wic => wic.Mode == WorldItemMode.Drop);
 
             foreach (var itemController in worldItemControllers)
             {

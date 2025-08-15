@@ -5,21 +5,21 @@ using VContainer;
 
 namespace Ingame
 {
+    public enum WorldItemMode
+    {
+        Drop,
+        Held,
+    }
+
     [RequireComponent(typeof(WorldItemScope))]
     public class WorldItemController : ItemControllerBase
     {
-        public enum Mode
-        {
-            Drop,
-            Held,
-        }
-
         [Inject] public readonly WorldItemView itemView;
         [Inject] private readonly Rigidbody rigidbody;
         [Inject] private readonly SphereCollider sphereCollider;
 
         public float spawnTime;
-        private Mode _currentMode;
+        public WorldItemMode Mode { get; private set; }
 
         protected override void Awake()
         {
@@ -27,18 +27,18 @@ namespace Ingame
             gameObject.SetLayerRecursively(LayerMask.NameToLayer("Entity"));
         }
 
-        public void SetMode(Mode newMode)
+        public void SetMode(WorldItemMode newMode)
         {
-            _currentMode = newMode;
+            Mode = newMode;
             switch (newMode)
             {
-                case Mode.Drop:
+                case WorldItemMode.Drop:
                     rigidbody.isKinematic = false;
                     sphereCollider.enabled = true;
                     spawnTime = Time.time;
                     Leap();
                     break;
-                case Mode.Held:
+                case WorldItemMode.Held:
                     rigidbody.isKinematic = true;
                     sphereCollider.enabled = false;
                     break;

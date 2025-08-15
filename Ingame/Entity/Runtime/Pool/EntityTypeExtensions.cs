@@ -17,8 +17,8 @@ namespace Ingame
                 case EntityType.PRJ_Melee:
                 case EntityType.PRJ_StunSphere:
                     return EntityCategory.Projectile;
-                case EntityType.WorldItem:
-                    return EntityCategory.WorldItem;
+                case EntityType.DropItem:
+                    return EntityCategory.DropItem;
                 case EntityType.OBJ_Hatch:
                 case EntityType.OBJ_Gateway:
                 case EntityType.OBJ_FuelTank:
