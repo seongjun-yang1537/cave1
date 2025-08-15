@@ -17,12 +17,14 @@ namespace UI
         void LateUpdate()
         {
             if (activeRenderer == null) return;
-            if (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject())
+
+            if (Input.GetMouseButtonDown(0))
             {
-                Hide(null);
-                return;
+                if (!RectTransformUtility.RectangleContainsScreenPoint(activeRect, Input.mousePosition, null))
+                {
+                    Hide(null);
+                }
             }
-            Position(activeRect);
         }
 
         IContextUIRenderer GetRenderer(Type contextType)
