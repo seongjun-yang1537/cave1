@@ -4,11 +4,12 @@ using VContainer.Unity;
 
 namespace Ingame
 {
-    public class DropItemScope : LifetimeScope
+    public class WorldItemScope : LifetimeScope
     {
         #region ========== Input ==========
         public ItemModelData itemModelData;
         public ItemModelState itemModelState;
+        public WorldItemController.Mode initialMode = WorldItemController.Mode.Drop;
         #endregion ====================
 
         [HideInInspector]
@@ -31,10 +32,17 @@ namespace Ingame
                 .As<ItemModel>()
                 .AsSelf();
 
-            builder.RegisterComponent(GetComponent<DropItemController>())
+            var controller = GetComponent<WorldItemController>();
+            builder.RegisterComponent(controller)
                 .AsSelf();
-            builder.RegisterComponent(GetComponent<DropItemView>())
+            builder.RegisterComponent(GetComponent<WorldItemView>())
                 .AsSelf();
+
+            builder.RegisterBuildCallback(resolver =>
+            {
+                var c = resolver.Resolve<WorldItemController>();
+                c.SetMode(initialMode);
+            });
         }
     }
 }

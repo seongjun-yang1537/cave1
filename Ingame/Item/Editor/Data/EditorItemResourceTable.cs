@@ -301,10 +301,10 @@ namespace Ingame
                 }
 
                 GameObject instance = PrefabUtility.LoadPrefabContents(prefabPath);
-                var scope = instance.GetComponent<DropItemScope>();
+                var scope = instance.GetComponent<WorldItemScope>();
                 if (scope == null)
                 {
-                    validationErrors.Add($"DropItemScope not found in {prefabPath}");
+                    validationErrors.Add($"WorldItemScope not found in {prefabPath}");
                     PrefabUtility.UnloadPrefabContents(instance);
                     continue;
                 }

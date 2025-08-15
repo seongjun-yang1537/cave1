@@ -5,7 +5,7 @@ namespace Ingame
         Player,
         Monster,
         Projectile,
-        DropItem,
+        WorldItem,
         Ore,
         Environment,
     }

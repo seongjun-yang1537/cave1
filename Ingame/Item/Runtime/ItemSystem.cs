@@ -12,91 +12,46 @@ namespace Ingame
 {
     public class ItemSystem : Singleton<ItemSystem>
     {
-        private List<DropItemController> _dropItemControllers = new();
-        [System.Obsolete("Use ItemControllers instead")]
-        public IEnumerable<DropItemController> DropItemControllers => _dropItemControllers.Where(c => c != null);
+        private List<WorldItemController> _itemControllers = new();
+        public IEnumerable<WorldItemController> ItemControllers => _itemControllers.Where(c => c != null);
 
-        private List<HeldItemController> _heldItemControllers = new();
-        [System.Obsolete("Use ItemControllers instead")]
-        public IEnumerable<HeldItemController> HeldItemControllers => _heldItemControllers.Where(c => c != null);
-
-        private List<ItemControllerBase> _itemControllers = new();
-        public IEnumerable<ItemControllerBase> ItemControllers => _itemControllers.Where(c => c != null);
-
-        public void Remove(ItemControllerBase controller)
+        public void Remove(WorldItemController controller)
         {
-            if (controller is DropItemController dropItemController)
-                _dropItemControllers.Remove(dropItemController);
-            if (controller is HeldItemController heldItemController)
-                _heldItemControllers.Remove(heldItemController);
             _itemControllers.Remove(controller);
         }
 
-        public static HeldItemController SpawnHeldItem(ItemSpawnContext context)
+        public static WorldItemController SpawnWorldItem(ItemSpawnContext context, WorldItemController.Mode mode = WorldItemController.Mode.Drop)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
 
             GameObject go = Instantiate(prefab);
             go.SetActive(false);
 
-            go.name = $"[HeldItem]{context.itemID}";
+            go.name = $"[WorldItem]{context.itemID}";
 
             Transform tr = go.transform;
             tr.SetParent(Instance.transform);
             tr.position = context.position;
 
-            var scope = go.AddComponent<HeldItemScope>();
-            var controller = go.AddComponent<HeldItemController>();
-            go.AddComponent<HeldItemView>();
+            var scope = go.AddComponent<WorldItemScope>();
+            var controller = go.AddComponent<WorldItemController>();
+            go.AddComponent<WorldItemView>();
 
             scope.itemModel = context.itemModel;
+            scope.initialMode = mode;
 
             go.SetActive(true);
 
-            Instance._heldItemControllers.Add(controller);
-            Instance._itemControllers.Add(controller);
-
-            return controller;
-        }
-
-        public static HeldItemController SpawnHeldItem(Vector3 position, ItemModel itemModel)
-            => SpawnHeldItem(ItemSpawnContext.Builder()
-                .SetPosition(position)
-                .SetItemModel(itemModel)
-                .Build()
-            );
-
-        public static DropItemController SpawnDropItem(ItemSpawnContext context)
-        {
-            GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
-
-            GameObject go = Instantiate(prefab);
-            go.SetActive(false);
-
-            go.name = $"[DropItem]{context.itemID}";
-
-            Transform tr = go.transform;
-            tr.SetParent(Instance.transform);
-            tr.position = context.position;
-
-            var scope = go.AddComponent<DropItemScope>();
-            var controller = go.AddComponent<DropItemController>();
-            go.AddComponent<DropItemView>();
-
-            scope.itemModel = context.itemModel;
-
-            go.SetActive(true);
-
-            Instance._dropItemControllers.Add(controller);
             Instance._itemControllers.Add(controller);
             return controller;
         }
 
-        public static DropItemController SpawnDropItem(Vector3 position, ItemModel itemModel)
-            => SpawnDropItem(ItemSpawnContext.Builder()
+        public static WorldItemController SpawnWorldItem(Vector3 position, ItemModel itemModel, WorldItemController.Mode mode = WorldItemController.Mode.Drop)
+            => SpawnWorldItem(ItemSpawnContext.Builder()
                 .SetPosition(position)
                 .SetItemModel(itemModel)
-                .Build()
+                .Build(),
+                mode
             );
     }
 

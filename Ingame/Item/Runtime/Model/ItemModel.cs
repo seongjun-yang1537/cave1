@@ -37,6 +37,7 @@ namespace Ingame
         #region ========== State ==========
         // TODO:강화 수치, 잠재 능력 등등
         public int count;
+        public bool isDropped;
         #endregion ====================
 
         public bool IsEmpty => count == 0;

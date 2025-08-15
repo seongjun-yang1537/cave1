@@ -114,7 +114,7 @@ namespace Ingame
             agentModel.inventory.RemoveItem(itemModel);
         }
 
-        public virtual void ChangeHeldItem(InventorySlotModel itemSlot)
+        public virtual void SetHeldItem(InventorySlotModel itemSlot)
         {
             agentModel.SetHeldItem(itemSlot);
         }
@@ -229,13 +229,9 @@ namespace Ingame
         protected virtual void OnRemoveStatusEffect(IStatusEffect effect)
             => agentView.onRemoveStatusEffect.Invoke(this, effect);
 
-        [AutoModelSubscribe(nameof(AgentModel.onHeldItem))]
-        protected virtual void OnHeldItem(InventorySlotModel itemSlot)
-            => agentView.onHeldItem.Invoke(this, itemSlot.itemModel);
-
-        [AutoModelSubscribe(nameof(AgentModel.onDropItem))]
-        protected virtual void OnDropItem(ItemModel itemModel)
-            => agentView.onDropItem.Invoke(this, itemModel);
+        [AutoModelSubscribe(nameof(AgentModel.onWorldItemChanged))]
+        protected virtual void OnWorldItemChanged(ItemModel itemModel)
+            => agentView.onWorldItemChanged.Invoke(this, itemModel);
         #endregion
     }
 }

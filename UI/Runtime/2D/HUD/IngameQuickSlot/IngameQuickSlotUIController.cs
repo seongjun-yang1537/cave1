@@ -50,7 +50,7 @@ namespace UI
         [AutoSubscribe(nameof(onKeyDownQuick))]
         private void OnKeyDownQuick(int num)
         {
-            playerController.ChangeHeldItem(GetQuickSlotItem(num));
+            playerController.SetHeldItem(GetQuickSlotItem(num));
             view.onKeyDownQuick.Invoke(num);
         }
     }

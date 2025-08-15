@@ -11,7 +11,7 @@ namespace Ingame
 
         private float magnetRange = 2.5f;
         private float magnetSpeed = 5f;
-        private readonly List<DropItemController> _collectingItems = new();
+        private readonly List<WorldItemController> _collectingItems = new();
 
         public PlayerItemMagnet(PlayerController playerController)
         {
@@ -31,10 +31,12 @@ namespace Ingame
 
         private void UpdateTrackingDroppedItems()
         {
-            var dropItemControllers = ItemSystem.Instance.ItemControllers
-                .Where(ic => ic is DropItemController)
-                .Select(ic => ic as DropItemController);
-            foreach (var itemController in dropItemControllers)
+            var worldItemControllers = ItemSystem.Instance.ItemControllers
+                .Where(ic => ic is WorldItemController)
+                .Select(ic => ic as WorldItemController)
+                .Where(wic => wic.CurrentMode == WorldItemController.Mode.Drop);
+
+            foreach (var itemController in worldItemControllers)
             {
                 if (!itemController.itemModel.isAcquireable)
                     continue;
@@ -82,7 +84,7 @@ namespace Ingame
             }
         }
 
-        private bool RayTestDropItemController(DropItemController itemController)
+        private bool RayTestDropItemController(WorldItemController itemController)
         {
             Vector3 itemPosition = itemController.transform.position + Vector3.up;
 

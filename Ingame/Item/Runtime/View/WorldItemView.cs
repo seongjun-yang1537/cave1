@@ -4,11 +4,10 @@ using VContainer;
 
 namespace Ingame
 {
-    [RequireComponent(typeof(DropItemScope))]
-    public class DropItemView : MonoBehaviour
+    [RequireComponent(typeof(WorldItemScope))]
+    public class WorldItemView : MonoBehaviour
     {
         [Inject] private ItemModel itemModel;
         [Inject] private ItemDropAnimation dropAnimation;
     }
 }
-
