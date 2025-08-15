@@ -14,6 +14,7 @@ namespace Ingame
         public string description;
 
         public EntityType entityType;
+        public EntityCategory entityCategory;
         public TriangleDomain navDomain;
 
         public virtual void LoadBySheet(EntityType entityType)
@@ -24,6 +25,7 @@ namespace Ingame
             if (entityDataMap.TryGetValue(this.entityType, out var sheetData))
             {
                 this.displayName = sheetData.displayName;
+                this.entityCategory = sheetData.entityCategory;
                 this.navDomain = sheetData.navDomain;
             }
             else

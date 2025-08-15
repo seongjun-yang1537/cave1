@@ -20,6 +20,7 @@ namespace Ingame
         #region ========== Data ==========
         private readonly EntityModelData data;
         public EntityType entityType => data.entityType;
+        public EntityCategory entityCategory => data.entityCategory;
         public TriangleDomain navDomain => data.navDomain;
         public EntityModelData Data => data;
         #endregion

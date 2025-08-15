@@ -21,5 +21,15 @@ namespace Ingame
 
         public static EntityResource LoadResource(EntityType entityType)
             => resourceTable[entityType];
+
+        public static EntityCategory GetCategory(EntityType entityType)
+        {
+            var entityDataMap = ModelDataSheet.Entity.GetDictionary();
+            if (entityDataMap.TryGetValue(entityType, out var sheetData))
+            {
+                return sheetData.entityCategory;
+            }
+            return EntityCategory.None;
+        }
     }
 }
