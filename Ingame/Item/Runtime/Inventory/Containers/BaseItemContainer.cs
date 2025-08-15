@@ -142,6 +142,19 @@ namespace Ingame
             return takenModel;
         }
 
+        public void ModifyItemCount(int slotIndex, int count)
+        {
+            InventorySlotModel slot = GetSlot(slotIndex);
+            if (slot == null || slot.itemModel.IsEmpty) return;
+
+            slot.itemModel.count += count;
+
+            if (slot.itemModel.count <= 0)
+                slot.itemModel = ItemModel.Empty;
+
+            onSlotChanged.Invoke(slot);
+        }
+
         public virtual void SwapSlot(int fromSlotIndex, int toSlotIndex)
         {
             if (fromSlotIndex == toSlotIndex) return;

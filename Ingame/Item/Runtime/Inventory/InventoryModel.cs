@@ -154,6 +154,13 @@ namespace Ingame
             return container.TakeToSlot(itemSlot.slotID, count);
         }
 
+        public void ModifyItemCount(InventoryContainerType containerType, int slotID, int count)
+        {
+            IItemContainer container = GetContainer(containerType);
+            if (container == null) return;
+            container.ModifyItemCount(slotID, count);
+        }
+
         public void Equip(InventorySlotModel fromBagSlot)
         {
             if (fromBagSlot == null || fromBagSlot.itemModel == null || fromBagSlot.itemModel.IsEmpty) return;
