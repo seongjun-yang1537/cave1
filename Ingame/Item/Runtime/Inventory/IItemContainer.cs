@@ -23,6 +23,8 @@ namespace Ingame
 
         public ItemModel TakeToSlot(int slotIndex, int count);
 
+        public void ModifyItemCount(int slotIndex, int count);
+
         public void SwapSlot(int fromSlotIndex, int toSlotIndex);
     }
 }

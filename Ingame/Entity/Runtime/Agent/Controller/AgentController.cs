@@ -124,6 +124,11 @@ namespace Ingame
             agentModel.DropItem(itemSlot);
         }
 
+        public virtual void ModifyItemCount(InventoryContainerType containerType, int slotID, int count)
+        {
+            agentModel.ModifyItemCount(containerType, slotID, count);
+        }
+
         public virtual float TakeDamage(AgentModel other, float damage)
         {
             damage = agentModel.TakeDamage(other, damage);

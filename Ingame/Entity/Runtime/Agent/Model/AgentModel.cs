@@ -151,6 +151,11 @@ namespace Ingame
                 onHeldItem.Invoke(heldItemSlot);
         }
 
+        public void ModifyItemCount(InventoryContainerType containerType, int slotID, int count)
+        {
+            inventory.ModifyItemCount(containerType, slotID, count);
+        }
+
         public float CalculateDamage(AgentModel target, float damage)
         {
             return damage;
