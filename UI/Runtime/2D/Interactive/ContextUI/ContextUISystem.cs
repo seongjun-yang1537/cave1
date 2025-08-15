@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Corelib.Utils;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,11 +15,11 @@ namespace UI
         RectTransform activeRect;
         Type activeRendererType;
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (activeRenderer == null) return;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.anyKeyDown && !Input.GetMouseButtonDown(1))
             {
                 if (!RectTransformUtility.RectangleContainsScreenPoint(activeRect, Input.mousePosition, null))
                 {
