@@ -26,7 +26,7 @@ namespace UI
 
         public void Render(TooltipUIModel context)
         {
-            if (context is not DescriptionTooltipModel descriptionContext) return;
+            if (context is not DescriptionTooltipUIModel descriptionContext) return;
 
             description = descriptionContext.description;
             Render();

@@ -17,7 +17,7 @@ namespace UI
 
         [LifecycleInject] protected AutoEventSubscriber autoEventSubscriber;
 
-        protected IUIViewHandler viewHandler;
+        public IUIViewHandler viewHandler;
         protected UIMonoBehaviour parent;
 
         [Serializable]

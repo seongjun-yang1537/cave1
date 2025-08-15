@@ -17,7 +17,7 @@ namespace UI
             switch (eventData.button)
             {
                 case PointerEventData.InputButton.Right:
-                    var contextModel = new ShopSellContextUIModel()
+                    var contextModel = new ShopSellContextUIModel(this)
                     {
                         slotModel = itemSlot,
                         price = 1000,
