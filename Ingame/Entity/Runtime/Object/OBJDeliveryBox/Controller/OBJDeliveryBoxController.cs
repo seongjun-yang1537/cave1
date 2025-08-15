@@ -30,7 +30,7 @@ namespace Ingame
                     .SetItemModel(newItemModel)
                     .Build();
 
-                DropItemController controller = ItemSystem.SpawnDropItem(context);
+                WorldItemController controller = ItemSystem.SpawnDropItem(context);
                 controller.Leap();
             }
 

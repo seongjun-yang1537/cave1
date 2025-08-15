@@ -11,7 +11,7 @@ namespace Ingame
 
         private float magnetRange = 2.5f;
         private float magnetSpeed = 5f;
-        private readonly List<DropItemController> _collectingItems = new();
+        private readonly List<WorldItemController> _collectingItems = new();
 
         public PlayerItemMagnet(PlayerController playerController)
         {
@@ -31,29 +31,36 @@ namespace Ingame
 
         private void UpdateTrackingDroppedItems()
         {
-            var dropItemControllers = ItemSystem.Instance.ItemControllers
-                .Where(ic => ic is DropItemController)
-                .Select(ic => ic as DropItemController);
-            foreach (var itemController in dropItemControllers)
-            {
-                if (!itemController.itemModel.isAcquireable)
-                    continue;
-                if (_collectingItems.Contains(itemController))
-                    continue;
-                if (Time.time - itemController.spawnTime < 2f)
-                    continue;
-                Vector3 diff = centerPosition - itemController.transform.position;
-                if (diff.sqrMagnitude >= magnetRange * magnetRange)
-                    continue;
-                if (!RayTestDropItemController(itemController))
-                    continue;
+            float magnetRangeSqr = magnetRange * magnetRange;
+            Vector3 center = centerPosition;
 
-                var rigidbody = itemController.GetComponent<Rigidbody>();
-                var collider = itemController.GetComponent<SphereCollider>();
-                rigidbody.isKinematic = true;
-                collider.enabled = false;
-                _collectingItems.Add(itemController);
+            foreach (var c in ItemSystem.Instance.ItemControllers.OfType<WorldItemController>())
+            {
+                if (!IsMagnetTarget(c, center, magnetRangeSqr)) continue;
+
+                if (c.TryGetComponent<Rigidbody>(out var rb) &&
+                    c.TryGetComponent<SphereCollider>(out var col))
+                {
+                    rb.isKinematic = true;
+                    col.enabled = false;
+                    _collectingItems.Add(c);
+                }
             }
+        }
+
+        private bool IsMagnetTarget(WorldItemController c, Vector3 center, float magnetRangeSqr)
+        {
+            if (!c.itemModel.isAcquireable) return false;
+            if (c.worldItemType != WorldItemType.DropItem) return false;
+            if (_collectingItems.Contains(c)) return false;
+            if (Time.time - c.spawnTime < 2f) return false;
+
+            Vector3 diff = center - c.transform.position;
+            if (diff.sqrMagnitude >= magnetRangeSqr) return false;
+
+            if (!RayTestWorldItemController(c)) return false;
+
+            return true;
         }
 
         private void UpdateFollowingCollectedItems()
@@ -82,7 +89,7 @@ namespace Ingame
             }
         }
 
-        private bool RayTestDropItemController(DropItemController itemController)
+        private bool RayTestWorldItemController(WorldItemController itemController)
         {
             Vector3 itemPosition = itemController.transform.position + Vector3.up;
 

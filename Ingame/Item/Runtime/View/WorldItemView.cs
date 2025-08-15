@@ -9,5 +9,10 @@ namespace Ingame
     {
         [Inject] private ItemModel itemModel;
         [Inject] private ItemDropAnimation dropAnimation;
+
+        public void Update()
+        {
+
+        }
     }
 }

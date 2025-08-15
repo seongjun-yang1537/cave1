@@ -3,19 +3,19 @@ using UnityEditor;
 
 namespace Ingame
 {
-    [CustomEditor(typeof(DropItemScope))]
-    public class EditorDropItemScope : Editor
+    [CustomEditor(typeof(WorldItemScope))]
+    public class EditorWorldItemScope : Editor
     {
-        DropItemScope dropItemScope;
+        WorldItemScope worldItemScope;
 
         ItemModel itemModel
         {
-            get => dropItemScope.itemModel ?? ItemModelFactory.Create(dropItemScope.itemModelData, dropItemScope.itemModelState);
+            get => worldItemScope.itemModel ?? ItemModelFactory.Create(worldItemScope.itemModelData, worldItemScope.itemModelState);
         }
 
         protected void OnEnable()
         {
-            dropItemScope = (DropItemScope)target;
+            worldItemScope = (WorldItemScope)target;
         }
 
         bool foldItemModel = true;

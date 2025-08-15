@@ -16,9 +16,16 @@ namespace Ingame
         private ItemModel _itemModel;
         private GameObject _owner;
 
-        private int _count;
+        private int _count = 1
         private bool _hasPosition = false;
         private bool _hasItem = false;
+
+        public ItemSpawnContextBuilder SetCount(int count)
+        {
+            _count = count;
+            _hasPosition = true;
+            return this;
+        }
 
         public ItemSpawnContextBuilder SetPosition(Vector3 position)
         {

@@ -20,21 +20,18 @@ namespace Ingame
             itemControllers.Remove(controller);
         }
 
-        public static HeldItemController SpawnHeldItem(ItemSpawnContext context)
+        public static WorldItemController SpawnHeldItem(ItemSpawnContext context)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
+            WorldItemScope prefabScope = prefab.GetComponent<WorldItemScope>();
+            {
+                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemID, context.count);
+                prefabScope.worldItemType = WorldItemType.HeldItem;
+            }
 
             GameObject go = Instantiate(prefab);
             {
                 go.name = $"[HeldItem]{context.itemID}";
-                go.AddComponent<HeldItemController>();
-                go.AddComponent<HeldItemView>();
-                HeldItemScope scope = go.AddComponent<HeldItemScope>();
-                {
-                    scope.onCreateModel = () => ItemModelFactory.Create(context.itemID);
-                }
-                scope.Build();
-
                 go.SetActive(true);
             }
 
@@ -44,7 +41,7 @@ namespace Ingame
                 tr.position = context.position;
             }
 
-            var controller = go.GetComponent<HeldItemController>();
+            var controller = go.GetComponent<WorldItemController>();
             {
                 Instance.itemControllers.Add(controller);
             }
@@ -52,27 +49,25 @@ namespace Ingame
             return controller;
         }
 
-        public static HeldItemController SpawnHeldItem(Vector3 position, ItemModel itemModel)
+        public static WorldItemController SpawnHeldItem(Vector3 position, ItemModel itemModel)
             => SpawnHeldItem(ItemSpawnContext.Builder()
                 .SetPosition(position)
                 .SetItemModel(itemModel)
                 .Build()
             );
 
-        public static DropItemController SpawnDropItem(ItemSpawnContext context)
+        public static WorldItemController SpawnDropItem(ItemSpawnContext context)
         {
             GameObject prefab = ItemDB.GetItemPrefab(context.itemID);
-            DropItemScope prefabScope = prefab.AddComponent<DropItemScope>();
+            WorldItemScope prefabScope = prefab.GetComponent<WorldItemScope>();
             {
-                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemID);
+                prefabScope.onCreateModel = () => ItemModelFactory.Create(context.itemID, context.count);
+                prefabScope.worldItemType = WorldItemType.DropItem;
             }
-            prefab.AddComponent<DropItemController>();
-            prefab.AddComponent<DropItemView>();
 
             GameObject go = Instantiate(prefab);
             {
                 go.name = $"[DropItem]{context.itemID}";
-                go.GetComponent<DropItemView>();
                 go.SetActive(true);
             }
 
@@ -82,7 +77,7 @@ namespace Ingame
                 tr.position = context.position;
             }
 
-            var controller = go.GetComponent<DropItemController>();
+            var controller = go.GetComponent<WorldItemController>();
             {
                 Instance.itemControllers.Add(controller);
             }
@@ -90,7 +85,7 @@ namespace Ingame
             return controller;
         }
 
-        public static DropItemController SpawnDropItem(Vector3 position, ItemModel itemModel)
+        public static WorldItemController SpawnDropItem(Vector3 position, ItemModel itemModel)
             => SpawnDropItem(ItemSpawnContext.Builder()
                 .SetPosition(position)
                 .SetItemModel(itemModel)

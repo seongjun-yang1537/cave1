@@ -16,8 +16,8 @@ namespace Ingame
         public ItemModel itemModel;
 
         #region ========== Prefab External ==========
-        [NonSerialized]
         public Func<ItemModel> onCreateModel;
+        public WorldItemType worldItemType;
         #endregion ====================
 
         protected override void Configure(IContainerBuilder builder)
@@ -29,8 +29,10 @@ namespace Ingame
             builder.RegisterComponent(transform)
                 .AsSelf();
 
+            builder.RegisterInstance(worldItemType)
+                .AsSelf();
+
             builder.Register<ItemDropAnimation>(Lifetime.Scoped)
-                .AsImplementedInterfaces()
                 .AsSelf();
 
             itemModel = onCreateModel?.Invoke() ?? new ItemModel(itemModelData, itemModelState);

@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace Ingame
 {
-    public class ItemDropAnimation : IInitializable, ITickable
+    public class ItemDropAnimation : IInitializable
     {
         [Inject] private Transform transform;
         private Transform body;
@@ -19,7 +19,7 @@ namespace Ingame
             body = transform.FindInChild(nameof(body));
         }
 
-        public void Tick()
+        public void Update()
         {
             UpdateAnimation();
         }

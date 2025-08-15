@@ -4,6 +4,14 @@ namespace Ingame
 {
     public static class ItemModelFactory
     {
+        public static ItemModel Create(ItemID itemID, int count)
+        {
+            ItemModelData data = ItemDB.LoadModelData(itemID);
+            ItemModel itemModel = Create(data);
+            itemModel.count = count;
+            return itemModel;
+        }
+
         public static ItemModel Create(ItemID itemID)
         {
             ItemModelData data = ItemDB.LoadModelData(itemID);

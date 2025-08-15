@@ -40,7 +40,7 @@ namespace Ingame
         protected void DropItemByForward(ItemModel itemModel, Vector3 forward)
         {
             Vector3 spawnPositoin = transform.position + 1.5f * Vector3.up;
-            DropItemController itemController = ItemSystem.SpawnDropItem(spawnPositoin, itemModel);
+            WorldItemController itemController = ItemSystem.SpawnDropItem(spawnPositoin, itemModel);
 
             GameObject go = itemController.gameObject;
 
@@ -57,7 +57,7 @@ namespace Ingame
                 return;
 
             Vector3 spawnPosition = heldItemSocket.position;
-            HeldItemController itemController = ItemSystem.SpawnHeldItem(spawnPosition, itemModel);
+            WorldItemController itemController = ItemSystem.SpawnHeldItem(spawnPosition, itemModel);
 
             GameObject go = itemController.gameObject;
             Transform tr = go.transform;

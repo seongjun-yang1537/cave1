@@ -11,22 +11,22 @@ namespace Ingame
         [Inject] public readonly WorldItemView itemView;
         [Inject] private readonly Rigidbody rigidbody;
         [Inject] private readonly SphereCollider sphereCollider;
+        [Inject] public readonly WorldItemType worldItemType;
+
         public float spawnTime;
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            rigidbody.isKinematic = false;
-            sphereCollider.enabled = true;
-            gameObject.SetLayerRecursively(LayerMask.NameToLayer("Entity"));
-        }
 
         protected override void OnEnable()
         {
             base.OnEnable();
+
+            rigidbody.isKinematic = worldItemType == WorldItemType.HeldItem;
+            sphereCollider.enabled = worldItemType != WorldItemType.HeldItem;
+            gameObject.SetLayerRecursively(LayerMask.NameToLayer("Entity"));
+
             spawnTime = Time.time;
-            Leap();
+
+            if (worldItemType == WorldItemType.DropItem)
+                Leap();
         }
 
         public void Leap()
