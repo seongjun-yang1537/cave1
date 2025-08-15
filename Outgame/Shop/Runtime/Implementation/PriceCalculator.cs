@@ -28,14 +28,13 @@ namespace Outgame
             { ItemID.HPPortion, 50 },
         };
 
-        public int GetPrice(ShopItemModel shopItemModel)
+        public int GetPrice(ItemModel itemModel)
         {
-            if (PriceTable.TryGetValue(shopItemModel.itemModel.Data.itemID, out var price))
+            if (PriceTable.TryGetValue(itemModel.Data.itemID, out var price))
             {
                 return price;
             }
 
-            // Return a default price for items not in the table
             return 100;
         }
     }
