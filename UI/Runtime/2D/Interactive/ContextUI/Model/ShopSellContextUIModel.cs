@@ -6,5 +6,9 @@ namespace UI
     {
         public InventorySlotModel slotModel;
         public int price;
+
+        public ShopSellContextUIModel(UIMonoBehaviour bindUI) : base(bindUI)
+        {
+        }
     }
 }

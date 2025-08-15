@@ -33,8 +33,13 @@ namespace UI
         private ShopItemModel shopItemModel;
         #endregion ====================
 
-        private ItemTooltipModel TooltipModel = new();
+        private ItemTooltipUIModel TooltipUIModel;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            TooltipUIModel = new(this);
+        }
         public override void Render()
         {
             txtTitle.text = $"{shopItemModel.itemModel.displayName}";
@@ -63,8 +68,8 @@ namespace UI
             if (itemModel == null || itemModel.IsEmpty)
                 return;
 
-            TooltipModel.itemModel = itemModel;
-            TooltipUISystem.Show(TooltipModel);
+            TooltipUIModel.itemModel = itemModel;
+            TooltipUISystem.Show(TooltipUIModel);
         }
 
         public void OnPointerExit(PointerEventData eventData)
