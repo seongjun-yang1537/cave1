@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace Ingame
 {
-    public class HeldItemScope : LifetimeScope
+    public class WorldItemScope : LifetimeScope
     {
         #region ========== Input ==========
         public ItemModelData itemModelData;
@@ -29,14 +29,18 @@ namespace Ingame
             builder.RegisterComponent(transform)
                 .AsSelf();
 
+            builder.Register<ItemDropAnimation>(Lifetime.Scoped)
+                .AsImplementedInterfaces()
+                .AsSelf();
+
             itemModel = onCreateModel?.Invoke() ?? new ItemModel(itemModelData, itemModelState);
             builder.RegisterInstance(itemModel)
                 .As<ItemModel>()
                 .AsSelf();
 
-            builder.RegisterComponent(GetComponent<HeldItemController>())
+            builder.RegisterComponent(GetComponent<WorldItemController>())
                 .AsSelf();
-            builder.RegisterComponent(GetComponent<HeldItemView>())
+            builder.RegisterComponent(GetComponent<WorldItemView>())
                 .AsSelf();
         }
     }
