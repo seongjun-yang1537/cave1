@@ -4,6 +4,23 @@ namespace Corelib.Utils
 {
     public static class ExGameObject
     {
+        public static void RemoveComponentSafe<T>(this GameObject go) where T : Component
+        {
+            if (go == null) return;
+
+            T comp = go.GetComponent<T>();
+            if (comp == null) return;
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                Object.DestroyImmediate(comp);
+            else
+                Object.Destroy(comp);
+#else
+        Object.Destroy(comp);
+#endif
+        }
+
         public static T MaybeAddComponent<T>(this GameObject gameObject) where T : MonoBehaviour
         {
             T component = gameObject.GetComponent<T>();

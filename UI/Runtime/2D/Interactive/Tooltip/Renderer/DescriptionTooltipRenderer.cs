@@ -6,19 +6,20 @@ using Corelib.Utils;
 
 namespace UI
 {
-    public class DescriptionTooltipRenderer : MonoBehaviour, ITooltipRenderer
+    public class DescriptionTooltipRenderer : UIMonoBehaviour, ITooltipRenderer
     {
-        [Required, ReferenceBind, SerializeField] private TextMeshProUGUI txtDescription;
+        [Required, ReferenceBind, SerializeField]
+        private TextMeshProUGUI txtDescription;
 
         public string description;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             Hide();
         }
 
-        [Button("Render")]
-        public void Render()
+        public override void Render()
         {
             txtDescription.text = $"{description}";
         }

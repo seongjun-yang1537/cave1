@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,6 +15,11 @@ namespace Ingame
         [HideInInspector]
         public ItemModel itemModel;
 
+        #region ========== Prefab External ==========
+        [NonSerialized]
+        public Func<ItemModel> onCreateModel;
+        #endregion ====================
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(GetComponent<Rigidbody>())
@@ -23,7 +29,8 @@ namespace Ingame
             builder.RegisterComponent(transform)
                 .AsSelf();
 
-            builder.RegisterInstance(itemModel ?? ItemModelFactory.Create(itemModelData, itemModelState))
+            itemModel = onCreateModel?.Invoke() ?? new ItemModel(itemModelData, itemModelState);
+            builder.RegisterInstance(itemModel)
                 .As<ItemModel>()
                 .AsSelf();
 
