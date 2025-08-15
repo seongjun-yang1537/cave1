@@ -76,7 +76,7 @@ namespace Outgame
             if (!CanBuyShopItem(playerController, shopItemModel))
                 return;
 
-            var price = priceCalculator.GetPrice(shopItemModel.itemModel);
+            var price = shopItemModel.price;
 
             shopModel.BuyShopItem(shopItemModel);
             playerController.SpendGold(price);
@@ -90,8 +90,7 @@ namespace Outgame
 
         public bool CanBuyShopItem(PlayerController playerController, ShopItemModel shopItemModel)
         {
-            var price = priceCalculator.GetPrice(shopItemModel.itemModel);
-            return playerController.playerModel.gold >= price;
+            return playerController.playerModel.gold >= shopItemModel.price;
         }
 
         public void TogglePopupUI(PlayerController playerController)

@@ -16,7 +16,8 @@ namespace Ingame
         public ItemModel itemModel;
 
         #region ========== Prefab External ==========
-        public Func<ItemModel> onCreateModel;
+        [SerializeField]
+        public ItemModel externalItemModel;
         public WorldItemType worldItemType;
         #endregion ====================
 
@@ -35,7 +36,7 @@ namespace Ingame
             builder.Register<ItemDropAnimation>(Lifetime.Scoped)
                 .AsSelf();
 
-            itemModel = onCreateModel?.Invoke() ?? new ItemModel(itemModelData, itemModelState);
+            itemModel = externalItemModel ?? new ItemModel(itemModelData, itemModelState);
             builder.RegisterInstance(itemModel)
                 .As<ItemModel>()
                 .AsSelf();

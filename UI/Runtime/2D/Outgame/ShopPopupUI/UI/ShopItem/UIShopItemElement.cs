@@ -33,12 +33,12 @@ namespace UI
         private ShopItemModel shopItemModel;
         #endregion ====================
 
-        private ItemTooltipUIModel TooltipUIModel;
+        private ItemTooltipUIModel tooltipUIModel;
 
         protected override void Awake()
         {
             base.Awake();
-            TooltipUIModel = new(this);
+            tooltipUIModel = new(this);
         }
 
         public override void Render()
@@ -75,8 +75,8 @@ namespace UI
             if (itemModel == null || itemModel.IsEmpty)
                 return;
 
-            TooltipUIModel.itemModel = itemModel;
-            TooltipUISystem.Show(TooltipUIModel);
+            tooltipUIModel.itemModel = itemModel;
+            TooltipUISystem.Show(tooltipUIModel);
         }
 
         public void OnPointerExit(PointerEventData eventData)

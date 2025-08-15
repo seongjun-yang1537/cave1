@@ -18,6 +18,8 @@ namespace Outgame
                     .OnValueChanged(value => data.itemModelData = value as ItemModelData)
                     + ItemModelDataInspector.RenderGroup(data.itemModelData, foldItemModelData, v => foldItemModelData = v)
                     + IntRangeeInspector.Render("Deliver Duration", data.deliverDurationRange)
+                    + SEditorGUILayout.Var("Price", data.price)
+                    .OnValueChanged(value => data.price = value)
                     + SEditorGUILayout.Var("Count", data.count)
                     .OnValueChanged(value => data.count = value)
                 );

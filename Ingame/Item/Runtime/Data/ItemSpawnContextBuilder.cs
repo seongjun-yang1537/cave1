@@ -15,18 +15,9 @@ namespace Ingame
         private Vector3 _position;
         private ItemModel _itemModel;
         private GameObject _owner;
-
-        private int _count = 1;
         private bool _hasPosition = false;
         private bool _hasItem = false;
         private bool _hasCount = false;
-
-        public ItemSpawnContextBuilder SetCount(int count)
-        {
-            _count = count;
-            _hasCount = true;
-            return this;
-        }
 
         public ItemSpawnContextBuilder SetPosition(Vector3 position)
         {
@@ -55,12 +46,7 @@ namespace Ingame
             if (!_hasItem)
                 throw new System.InvalidOperationException("DropItemSpawnContextBuilder: itemID is required.");
 
-            if (_hasCount)
-                _itemModel.count = _count;
-            else
-                _count = _itemModel.count;
-
-            return new ItemSpawnContext(_position, _itemModel, _count, _owner);
+            return new ItemSpawnContext(_position, _itemModel, _owner);
         }
     }
 }

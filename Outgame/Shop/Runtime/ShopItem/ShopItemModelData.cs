@@ -14,6 +14,7 @@ namespace Outgame
         [SerializeField]
         public IntRange deliverDurationRange;
 
+        public int price;
         public int count;
     }
 }

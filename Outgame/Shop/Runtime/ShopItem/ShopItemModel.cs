@@ -37,6 +37,7 @@ namespace Outgame
             this.itemModel.count = data.count;
 
             this.phase = ShopItemPhase.Unavailable;
+            this.price = data.price;
             // TODO this.remainDeliverDays = deliverDuration.;
 
             if (state != null)
