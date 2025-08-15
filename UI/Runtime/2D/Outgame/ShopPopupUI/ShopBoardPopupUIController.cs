@@ -61,8 +61,17 @@ namespace UI
             switch (eventBus)
             {
                 case UIShopItemElementEventBus:
-                    var bus = eventBus as UIShopItemElementEventBus;
-                    shopBoardController.OnBuyShopItem(playerController, bus.targetItem);
+                    {
+                        var bus = eventBus as UIShopItemElementEventBus;
+                        shopBoardController.OnBuyShopItem(playerController, bus.targetItem);
+                    }
+                    break;
+                case ShopSellContextUIEventBus:
+                    {
+                        var bus = eventBus as ShopSellContextUIEventBus;
+                        int count = bus.count;
+                        Debug.Log($"{bus.slotModel.itemModel.itemID} {bus.count}");
+                    }
                     break;
             }
         }

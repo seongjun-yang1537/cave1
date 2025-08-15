@@ -46,8 +46,6 @@ namespace UI
 
             btnMultiple.gameObject.SetActive(count > 1);
             txtMultiple.text = $"{count}개 판매 (${price * 64})";
-
-            Debug.Log(viewHandler == null);
         }
 
         public void Render(ContextUIModel context)
@@ -73,12 +71,20 @@ namespace UI
 
         private void OnButtonOne()
         {
-
+            viewHandler.SendEventBus(new ShopSellContextUIEventBus()
+            {
+                slotModel = slotModel,
+                count = 1,
+            });
         }
 
         private void OnButtonMultiple()
         {
-
+            viewHandler.SendEventBus(new ShopSellContextUIEventBus()
+            {
+                slotModel = slotModel,
+                count = slotModel.itemModel.count,
+            });
         }
     }
 }
